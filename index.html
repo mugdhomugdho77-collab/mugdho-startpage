@@ -29,50 +29,41 @@
             align-items: center;
             flex-grow: 1;
         }
-
-        /* Premium Logo & Title Header above Search Bar */
-        .portal-brand-header {
+        
+        /* Top Banner & Robot Logo Style */
+        .top-banner {
+            width: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
             margin-bottom: 20px;
-            margin-top: 10px;
             text-align: center;
         }
-
-        /* 4K Robot Icon Styling with Glowing Ring Effect */
-        .brand-logo-icon {
-            width: 46px;
-            height: 46px;
-            background: radial-gradient(circle, #2563eb 0%, #1e1b4b 70%);
-            border: 2p solid rgba(59, 130, 246, 0.6);
-            border-radius: 50%;
+        .brand-header-wrapper {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.4);
-            flex-shrink: 0;
+            gap: 12px;
+            margin-bottom: 4px;
         }
-
-        .brand-title-group h1 {
+        .brand-robot-logo {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 219, 222, 0.6));
+        }
+        .top-banner h1 {
             font-size: 26px;
             margin: 0;
-            background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+            background: linear-gradient(90deg, #00dbde, #fc00ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
-            letter-spacing: 0.8px;
-            text-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+            letter-spacing: 0.5px;
         }
-
-        .brand-title-group p {
-            font-size: 10.5px;
-            color: rgba(255, 255, 255, 0.55);
-            margin: 2px 0 0 0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .top-banner p {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            margin: 0;
         }
 
         /* Google Style Search Bar */
@@ -115,19 +106,19 @@
             font-size: 18px;
         }
 
-        /* Shortcut Grid (5 Columns like advanced mobile browsers) */
+        /* Shortcut Grid (Real App Style Icons) */
         .shortcuts-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px 8px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px 10px;
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .shortcut-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 16px;
-            padding: 10px 4px;
+            padding: 12px 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -137,21 +128,19 @@
         }
         .shortcut-card:hover {
             transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(56, 189, 248, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(0, 219, 222, 0.4);
         }
         .icon-box {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            font-size: 22px;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            font-size: 24px;
         }
         .shortcut-card span {
             font-size: 11px;
@@ -167,15 +156,15 @@
         /* Privacy / Incognito PRO banner */
         .privacy-box {
             width: 100%;
-            background: rgba(20, 18, 45, 0.7);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(20, 18, 45, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.35);
             border-radius: 14px;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             backdrop-filter: blur(10px);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .privacy-info h4 {
             margin: 0 0 3px 0;
@@ -192,7 +181,14 @@
             line-height: 1.3;
         }
 
-        /* Bottom Tab Bar (UC / Chrome hybrid navigation) */
+        footer {
+            margin: 10px 0;
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Bottom Navigation Bar resembling UC/Chrome mobile layout */
         .bottom-nav {
             width: 100%;
             max-width: 600px;
@@ -205,6 +201,7 @@
             align-items: center;
             position: sticky;
             bottom: 0;
+            z-index: 100;
         }
         .nav-item {
             background: none;
@@ -220,17 +217,10 @@
             transition: color 0.2s;
         }
         .nav-item:hover, .nav-item.active {
-            color: #38bdf8;
+            color: #00dbde;
         }
         .nav-item span {
             font-size: 9px;
-        }
-
-        footer {
-            margin: 10px 0;
-            text-align: center;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
         }
 
         @media (max-width: 480px) {
@@ -239,8 +229,8 @@
                 gap: 10px 6px;
             }
             .icon-box {
-                width: 40px;
-                height: 40px;
+                width: 42px;
+                height: 42px;
                 font-size: 20px;
             }
         }
@@ -248,13 +238,13 @@
 </head>
 <body>
     <div class="container">
-        <!-- Stylish Logo & Title Header right above the search bar -->
-        <div class="portal-brand-header">
-            <div class="brand-logo-icon">🤖</div>
-            <div class="brand-title-group">
+        <!-- Top Banner with Robot Icon and Mugdho Portal Title -->
+        <div class="top-banner">
+            <div class="brand-header-wrapper">
+                <img src="https://i.ibb.co.com/6c6z70v/robot-icon.png" alt="Robot Logo" class="brand-robot-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/4712/4712109.png'">
                 <h1>Mugdho Portal</h1>
-                <p>Ultimate Fast Secure Browser</p>
             </div>
+            <p>Ultimate Fast Secure Browser Home</p>
         </div>
 
         <!-- Google Style Search Bar -->
@@ -314,26 +304,26 @@
                 <span>Ask AI</span>
             </a>
 
-            <!-- VPN / Tools -->
+            <!-- VPN -->
             <a href="https://1.1.1.1" class="shortcut-card" target="_blank">
                 <div class="icon-box" style="background: #3b82f6;">🛡️</div>
                 <span>VPN Fast</span>
             </a>
 
             <!-- History -->
-            <a href="#" onclick="alert('History feature active')" class="shortcut-card">
+            <a href="#" onclick="alert('Browsing history is secure.')" class="shortcut-card">
                 <div class="icon-box" style="background: #64748b;">🕒</div>
                 <span>History</span>
             </a>
 
             <!-- Bookmark -->
-            <a href="#" onclick="alert('Saved to Bookmarks')" class="shortcut-card">
+            <a href="#" onclick="alert('Saved to bookmarks successfully!')" class="shortcut-card">
                 <div class="icon-box" style="background: #8b5cf6;">🔖</div>
-                <span>Bookmarks</span>
+                <span>Bookmark</span>
             </a>
 
             <!-- More / Apps -->
-            <a href="#" onclick="alert('More features coming soon!')" class="shortcut-card">
+            <a href="#" onclick="alert('More features unlocked!')" class="shortcut-card">
                 <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">➕</div>
                 <span>More</span>
             </a>
@@ -370,7 +360,7 @@
             <span>📑</span>
             <span>Tabs</span>
         </button>
-        <button class="nav-item" onclick="alert('Mugdho Portal Options')">
+        <button class="nav-item" onclick="alert('Mugdho Portal Menu Active')">
             <span>☰</span>
             <span>Menu</span>
         </button>
