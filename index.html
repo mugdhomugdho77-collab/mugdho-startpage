@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugdho Browser Portal</title>
+    <title>Mugdho Portal - Ultimate Browser</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: all 0.3s ease;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,56 +18,76 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
             overflow-x: hidden;
+            padding-bottom: 70px; /* Space for bottom navigation bar */
         }
-        .container {
+        .body-incognito {
+            background: linear-gradient(135deg, #05020a, #12091f, #020105) !important;
+        }
+        .main-wrapper {
             width: 100%;
             max-width: 650px;
-            padding: 20px 15px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             flex-grow: 1;
         }
-        /* UC/Firefox hybrid top banner */
-        .top-banner {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .brand-header-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 4px;
-        }
-        .brand-robot-logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.5));
-        }
-        .top-banner h1 {
-            font-size: 30px;
-            background: linear-gradient(30deg, #ff7e5f, #feb47b, #00d2ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            letter-spacing: 0.8px;
-        }
-        .top-banner p {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .desktop-mode {
+            max-width: 100% !important;
+            padding: 20px 40px !important;
         }
 
-        /* Browser Toolbar / Quick Action Bar (UC & Firefox style features) */
+        /* UC Browser 2026 World Cup Header Banner */
+        .uc-worldcup-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #181038, #2a1b54, #120b29);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .wc-top-title {
+            font-size: 13px;
+            color: #fbbf24;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .wc-main-title {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(to right, #ffd700, #ff7e5f, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        .wc-graphics {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .news-sched-btn {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Browser Toolbar */
         .browser-toolbar {
             width: 100%;
             display: flex;
@@ -75,7 +96,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 10px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             backdrop-filter: blur(10px);
         }
         .tool-btn {
@@ -88,8 +109,6 @@
             align-items: center;
             gap: 4px;
             cursor: pointer;
-            text-decoration: none;
-            transition: 0.2s;
         }
         .tool-btn span {
             font-size: 16px;
@@ -99,31 +118,40 @@
             transform: scale(1.05);
         }
 
-        /* Omnibox / Search Bar */
+        /* Advanced Omnibox (Search Bar with Engine Icon & Voice/Lens) */
         .search-box {
             width: 100%;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 35px;
-            padding: 12px 18px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 22px;
+            gap: 10px;
+            margin-bottom: 20px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
         .search-box:focus-within {
-            border-color: #ff7e5f;
+            border-color: #ffd700;
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 25px rgba(255, 126, 95, 0.25);
+        }
+        .engine-icon-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .engine-logo {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
         }
         .search-select {
             background: transparent;
             border: none;
-            color: #ff7e5f;
-            font-size: 14px;
+            color: #ffd700;
+            font-size: 13px;
             font-weight: 600;
             outline: none;
             cursor: pointer;
@@ -143,60 +171,67 @@
         .search-input::placeholder {
             color: rgba(255,255,255,0.4);
         }
-        .search-btn {
-            background: none;
-            border: none;
-            color: #ff7e5f;
-            cursor: pointer;
+        .search-action-icons {
             display: flex;
             align-items: center;
-            padding: 0;
+            gap: 10px;
+        }
+        .action-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .action-icon-btn:hover {
+            transform: scale(1.15);
         }
 
-        /* App Grid Container (Official Style) */
+        /* App Grid Container */
         .grid-container {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 18px;
         }
         .card {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 20px;
-            padding: 16px 8px;
+            border-radius: 18px;
+            padding: 14px 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-decoration: none;
             color: #fff;
-            transition: all 0.25s ease;
             backdrop-filter: blur(8px);
         }
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 126, 95, 0.4);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 215, 0, 0.4);
         }
         .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             background: rgba(255, 255, 255, 0.06);
         }
         .icon-box img {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
         }
         .card span {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.85);
             text-align: center;
@@ -206,7 +241,57 @@
             text-overflow: ellipsis;
         }
 
-        /* Incognito / Privacy Notice Banner (UC style) */
+        /* Google-style Floating News Feed */
+        .news-section-title {
+            width: 100%;
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 12px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-feed-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .news-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            cursor: pointer;
+        }
+        .news-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .news-img {
+            width: 80px;
+            height: 65px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .news-content h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .news-content p {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Privacy Banner */
         .privacy-banner {
             width: 100%;
             background: rgba(138, 43, 226, 0.12);
@@ -216,7 +301,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
         }
         .privacy-text h4 {
             font-size: 13px;
@@ -234,53 +318,116 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
-            cursor: pointer;
             border: none;
         }
 
-        .footer {
-            margin-top: auto;
-            padding: 15px 0;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            text-align: center;
+        /* Bottom Floating Browser Navigation Bar (Home, Back, etc.) */
+        .bottom-nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 12, 27, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            backdrop-filter: blur(15px);
+            z-index: 999;
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+        }
+        .nav-item span {
+            font-size: 18px;
+        }
+        .nav-item:hover {
+            color: #ffd700;
+        }
+
+        /* Popup Notification */
+        #notificationModal {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(15, 12, 27, 0.95);
+            border: 1px solid #ffd700;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #notificationModal.show {
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header Banner with custom robot logo -->
-        <div class="top-banner">
-            <div class="brand-header-wrapper">
-                <img src="https://api.iconify.design/fluent-emoji-flat:robot.svg" alt="Robot Logo" class="brand-robot-logo">
-                <h1>Mugdho Portal</h1>
+    <div id="notificationModal">⚡ Notification Message</div>
+
+    <div class="main-wrapper" id="mainContainer">
+        <!-- UC Browser 2026 World Cup Banner -->
+        <div class="uc-worldcup-banner">
+            <div class="wc-top-title">2026 FIFA World Cup Special</div>
+            <div class="wc-main-title">UC Browser Portal</div>
+            <div class="wc-graphics">
+                <span>🏆</span> ⚽ <span>📢</span>
             </div>
-            <p>Ultimate Web Browser Dashboard</p>
+            <button class="news-sched-btn" onclick="showMsg('🏆 Opening 2026 World Cup Live Schedule & News...')">News & Schedule &rsaquo;</button>
         </div>
 
-        <!-- UC & Firefox Hybrid Browser Toolbar -->
+        <!-- Browser Action Toolbar -->
         <div class="browser-toolbar">
-            <button class="tool-btn" onclick="alert('VPN Protected & Active!')"><span>🛡️</span>VPN Pro</button>
-            <button class="tool-btn" onclick="toggleIncognito()"><span>🕵️‍♂️</span>Incognito</button>
-            <button class="tool-btn" onclick="toggleDesktopSite()"><span>💻</span>Desktop Site</button>
-            <button class="tool-btn" onclick="window.location.reload()"><span>🔄</span>Refresh</button>
-            <button class="tool-btn" onclick="alert('Added to Bookmarks successfully!')"><span>⭐</span>Bookmark</button>
+            <button class="tool-btn" id="vpnBtn" onclick="toggleVPN()">
+                <span id="vpnIcon">🛡️</span>VPN Off
+            </button>
+            <button class="tool-btn" id="incognitoBtn" onclick="toggleIncognito()">
+                <span id="incognitoIcon">🕵️‍♂️</span>Incognito
+            </button>
+            <button class="tool-btn" id="desktopBtn" onclick="toggleDesktop()">
+                <span id="desktopIcon">💻</span>Desktop Site
+            </button>
+            <button class="tool-btn" onclick="window.location.reload()">
+                <span>🔄</span>Refresh
+            </button>
+            <button class="tool-btn" onclick="showMsg('⭐ Added to Browser Bookmarks!')">
+                <span>⭐</span>Bookmark
+            </button>
         </div>
 
-        <!-- Google / UC Omnibox -->
+        <!-- Advanced Omnibox with Engine Icon, Voice & Google Lens -->
         <form class="search-box" action="https://www.google.com/search" method="GET" target="_blank" id="searchForm">
-            <select class="search-select" id="searchEngine">
-                <option value="https://www.google.com/search?q=">Google</option>
-                <option value="https://www.youtube.com/results?search_query=">YouTube</option>
-                <option value="https://github.com/search?q=">GitHub</option>
-            </select>
-            <input type="text" class="search-input" name="q" placeholder="Search with Google, UC & Firefox style..." autocomplete="off">
-            <button type="submit" class="search-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </button>
+            <div class="engine-icon-container">
+                <img id="selectedEngineLogo" src="https://api.iconify.design/logos:google-icon.svg" class="engine-logo" alt="Engine Icon">
+                <select class="search-select" id="searchEngine" onchange="updateEngineIcon(this)">
+                    <option value="https://www.google.com/search?q=" data-icon="https://api.iconify.design/logos:google-icon.svg">Google</option>
+                    <option value="https://duckduckgo.com/?q=" data-icon="https://api.iconify.design/logos:duckduckgo.svg">DuckDuckGo</option>
+                    <option value="https://yandex.com/search/?text=" data-icon="https://api.iconify.design/logos:yandex.svg">Yandex</option>
+                    <option value="https://www.bing.com/search?q=" data-icon="https://api.iconify.design/logos:microsoft-icon.svg">Bing</option>
+                </select>
+            </div>
+            <input type="text" class="search-input" id="searchInput" name="q" placeholder="Search or enter web address..." autocomplete="off">
+            <div class="search-action-icons">
+                <button type="button" class="action-icon-btn" onclick="startVoiceSearch()" title="Voice Search">🎙️</button>
+                <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">📷</button>
+            </div>
         </form>
 
-        <!-- Official Icons Grid -->
+        <!-- Apps Grid -->
         <div class="grid-container">
             <a href="https://chatgpt.com" class="card" target="_blank">
                 <div class="icon-box"><img src="https://api.iconify.design/logos:openai-icon.svg" alt="ChatGPT"></div>
@@ -316,51 +463,189 @@
             </a>
         </div>
 
-        <!-- UC / Firefox Style Privacy Banner -->
+        <!-- Google-style Floating News Feed (Bangladesh & International) -->
+        <div class="news-section-title">📰 Trending News & Updates</div>
+        <div class="news-feed-container">
+            <div class="news-card" onclick="showMsg('Opening 2026 World Cup Qualifier Highlights...')">
+                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=150" class="news-img" alt="News">
+                <div class="news-content">
+                    <h3>2026 FIFA World Cup: Teams Gear Up for Global Clash in North America</h3>
+                    <p>International Sports • 2 hours ago</p>
+                </div>
+            </div>
+            <div class="news-card" onclick="showMsg('Opening National Tech & Education Portal...')">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=150" class="news-img" alt="News">
+                <div class="news-content">
+                    <h3>Bangladesh Tech Sector Sees Rapid Growth with AI and Digital Innovation</h3>
+                    <p>National News • 4 hours ago</p>
+                </div>
+            </div>
+            <div class="news-card" onclick="showMsg('Opening Global Economic Review...')">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=150" class="news-img" alt="News">
+                <div class="news-content">
+                    <h3>Global Markets React to Latest Tech Innovations and Economic Policies</h3>
+                    <p>World News • 6 hours ago</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Banner -->
         <div class="privacy-banner">
             <div class="privacy-text">
-                <h4>Private Browsing Mode</h4>
-                <p>No search history, cookies or cache are saved.</p>
+                <h4 id="privacyTitle">Private Browsing Mode</h4>
+                <p id="privacyDesc">No search history, cookies or cache are saved.</p>
             </div>
-            <button class="privacy-badge" onclick="alert('Incognito active: Browsing secure.')">PRO ON</button>
+            <button class="privacy-badge" id="privacyBadgeState">PRO ON</button>
         </div>
     </div>
 
-    <div class="footer">
-        Powered by Mugdho Portal • UC & Firefox Hybrid UI
+    <!-- Bottom Browser Navigation Bar (Back, Home, etc.) -->
+    <div class="bottom-nav-bar">
+        <button class="nav-item" onclick="goBack()">
+            <span>⬅️</span>Back
+        </button>
+        <button class="nav-item" onclick="goHome()">
+            <span>🏠</span>Home
+        </button>
+        <button class="nav-item" onclick="showMsg('Tabs Overview')">
+            <span>📑</span>Tabs
+        </button>
+        <button class="nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span>⬆️</span>Top
+        </button>
+    </div>
+
+    <div class="footer" style="margin-bottom: 50px;">
+        Mugdho Browser Portal • Powered by UC & Firefox Hybrid UI
     </div>
 
     <script>
+        // Search Engine Selector & Official Icon Changer
         const searchForm = document.getElementById('searchForm');
         const searchEngine = document.getElementById('searchEngine');
-        const searchInput = searchForm.querySelector('.search-input');
+        const searchInput = document.getElementById('searchInput');
+        const selectedEngineLogo = document.getElementById('selectedEngineLogo');
 
-        searchEngine.addEventListener('change', function() {
-            searchForm.action = this.value;
-        });
-
-        searchForm.addEventListener('submit', function(e) {
-            if(searchEngine.value.includes('youtube')) {
-                searchInput.name = 'search_query';
-            } else {
-                searchInput.name = 'q';
-            }
-        });
-
-        function toggleIncognito() {
-            alert('Incognito Mode Enabled! Your browsing session is now private.');
-            document.body.style.background = 'linear-gradient(135deg, #050505, #121212, #000000)';
+        function updateEngineIcon(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            selectedEngineLogo.src = selectedOption.getAttribute('data-icon');
+            searchForm.action = selectedOption.value;
+            let nameAttr = 'q';
+            if(selectedOption.value.includes('yandex')) nameAttr = 'text';
+            searchInput.name = nameAttr;
         }
 
-        function toggleDesktopSite() {
-            let currentWidth = document.querySelector('.container').style.maxWidth;
-            if(currentWidth === '100%') {
-                document.querySelector('.container').style.maxWidth = '650px';
-                alert('Switched to Mobile View Layout.');
-            } else {
-                document.querySelector('.container').style.maxWidth = '100%';
-                alert('Switched to Desktop Site View Mode.');
+        // Voice Search Integration (Speech Recognition)
+        function startVoiceSearch() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showMsg('❌ Voice search is not supported in this browser.');
+                return;
             }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'bn-BD'; // Supports Bengali and English speech
+            recognition.onstart = function() {
+                showMsg('🎙️ Listening... Speak now!');
+            };
+            recognition.onresult = function(event) {
+                const speechToText = event.results[0][0].transcript;
+                searchInput.value = speechToText;
+                showMsg('✅ Recognized: ' + speechToText);
+                searchForm.submit();
+            };
+            recognition.onerror = function() {
+                showMsg('⚠️ Voice recognition error. Try again.');
+            };
+            recognition.start();
+        }
+
+        // Google Lens Simulation Feature
+        function openGoogleLens() {
+            showMsg('📷 Opening Google Lens Scanner...');
+            window.open('https://lens.google.com', '_blank');
+        }
+
+        // Floating Notification Popup
+        function showMsg(text) {
+            const modal = document.getElementById('notificationModal');
+            modal.innerText = text;
+            modal.classList.add('show');
+            setTimeout(() => {
+                modal.classList.remove('show');
+            }, 2500);
+        }
+
+        // VPN Toggle
+        let vpnActive = false;
+        function toggleVPN() {
+            vpnActive = !vpnActive;
+            const btn = document.getElementById('vpnBtn');
+            const icon = document.getElementById('vpnIcon');
+            if(vpnActive) {
+                btn.style.color = '#10b981';
+                icon.innerText = '🌐';
+                showMsg('🔒 Secure VPN Connected (Khulna Node Active)');
+            } else {
+                btn.style.color = '#fff';
+                icon.innerText = '🛡️';
+                showMsg('🛡️ VPN Disconnected');
+            }
+        }
+
+        // Incognito Mode Animation & Toggle
+        let incognitoActive = false;
+        function toggleIncognito() {
+            incognitoActive = !incognitoActive;
+            const body = document.body;
+            const btn = document.getElementById('incognitoBtn');
+            const pTitle = document.getElementById('privacyTitle');
+            const pDesc = document.getElementById('privacyDesc');
+            
+            if(incognitoActive) {
+                body.classList.add('body-incognito');
+                btn.style.color = '#a855f7';
+                pTitle.innerText = "🔒 Incognito PRO Active";
+                pDesc.innerText = "Encrypted session. Your digital footprint is hidden.";
+                showMsg('🕵️‍♂️ Incognito Mode Activated with Animation!');
+            } else {
+                body.classList.remove('body-incognito');
+                btn.style.color = '#fff';
+                pTitle.innerText = "Private Browsing Mode";
+                pDesc.innerText = "No search history, cookies or cache are saved.";
+                showMsg('💡 Switched back to Normal Browser Mode.');
+            }
+        }
+
+        // Desktop Site Toggle
+        let desktopActive = false;
+        function toggleDesktop() {
+            desktopActive = !desktopActive;
+            const container = document.getElementById('mainContainer');
+            const btn = document.getElementById('desktopBtn');
+            if(desktopActive) {
+                container.classList.add('desktop-mode');
+                btn.style.color = '#3b82f6';
+                showMsg('💻 Switched to Desktop View Site Layout');
+            } else {
+                container.classList.remove('desktop-mode');
+                btn.style.color = '#fff';
+                showMsg('📱 Switched back to Mobile View Layout');
+            }
+        }
+
+        // Bottom Navigation Buttons Logic
+        function goBack() {
+            if(window.history.length > 1) {
+                window.history.back();
+            } else {
+                showMsg('⬅️ No previous page in history');
+            }
+        }
+
+        function goHome() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            searchInput.value = '';
+            showMsg('🏠 Welcome back to Mugdho Portal Home');
         }
     </script>
 </body>
