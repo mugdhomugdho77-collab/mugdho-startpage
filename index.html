@@ -3,79 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- কাস্টম মোডের স্টাইল ও মেটা ট্যাগ -->
-    <title>Mugdho Startpage - Your Ultimate Web Portal & Study Hub</title>
-    <meta name="description" content="Mugdho Startpage is a fast, custom web launcher and portal to access your favorite websites, tools, and Mugdho Study Hub instantly.">
-    <meta name="keywords" content="Mugdho Study Hub, Web Launcher, Custom Homepage, BL College, Study Material, Online Portal">
-    <meta name="author" content="Mugdho">
-
-    <!-- কাস্টম স্টাইল ও ডিজাইন -->
+    <title>Mugdho Portal - Ultimate Pro Browser</title>
     <style>
-        * {
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: linear-gradient(135deg, #0d0b21, #1e1b4b, #0f172a);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: flex-start;
-            padding: 40px 20px;
         }
-
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 600px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 50px;
+            flex-grow: 1;
         }
 
-        /* লোগো বা হেডিং */
-        .logo-title {
-            font-size: 2.8rem;
-            font-weight: bold;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #00dbde, #fc00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Premium Logo & Title Header above Search Bar */
+        .portal-brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            margin-top: 10px;
             text-align: center;
         }
 
-        /* সার্চ বার স্টাইল */
-        .search-box {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            padding: 12px 25px;
+        /* 4K Robot Icon Styling with Glowing Ring Effect */
+        .brand-logo-icon {
+            width: 46px;
+            height: 46px;
+            background: radial-gradient(circle, #2563eb 0%, #1e1b4b 70%);
+            border: 2p solid rgba(59, 130, 246, 0.6);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: all 0.3s ease;
-            margin-bottom: 40px;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.4);
+            flex-shrink: 0;
         }
 
-        .search-box:focus-within {
-            border-color: #00dbde;
-            box-shadow: 0 0 20px rgba(0, 219, 222, 0.5);
+        .brand-title-group h1 {
+            font-size: 26px;
+            margin: 0;
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .brand-title-group p {
+            font-size: 10.5px;
+            color: rgba(255, 255, 255, 0.55);
+            margin: 2px 0 0 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Google Style Search Bar */
+        .search-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 35px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 15px;
+            width: 100%;
+        }
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .google-logo-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .search-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        /* Shortcut Grid (5 Columns like advanced mobile browsers) */
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px 8px;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        .shortcut-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 10px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.25s ease;
+        }
+        .shortcut-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-size: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+        .shortcut-card span {
+            font-size: 11px;
+            font-weight: 500;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Privacy / Incognito PRO banner */
+        .privacy-box {
+            width: 100%;
+            background: rgba(20, 18, 45, 0.7);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+        }
+        .privacy-info h4 {
+            margin: 0 0 3px 0;
+            font-size: 13px;
+            color: #c4b5fd;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .privacy-info p {
+            margin: 0;
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.3;
+        }
+
+        /* Bottom Tab Bar (UC / Chrome hybrid navigation) */
+        .bottom-nav {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(15, 13, 35, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-item:hover, .nav-item.active {
+            color: #38bdf8;
+        }
+        .nav-item span {
+            font-size: 9px;
+        }
+
+        footer {
+            margin: 10px 0;
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .shortcuts-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px 6px;
+            }
+            .icon-box {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="logo-title">Mugdho Portal</h1>
-        <div class="search-box">
-            <!-- এখানে সার্চ অপশন বা শর্টকাটগুলো থাকবে -->
+        <!-- Stylish Logo & Title Header right above the search bar -->
+        <div class="portal-brand-header">
+            <div class="brand-logo-icon">🤖</div>
+            <div class="brand-title-group">
+                <h1>Mugdho Portal</h1>
+                <p>Ultimate Fast Secure Browser</p>
+            </div>
         </div>
+
+        <!-- Google Style Search Bar -->
+        <form class="search-box" action="https://www.google.com/search" method="GET" target="_blank">
+            <div class="google-logo-icon" style="color: #4285F4; font-weight: bold;">G</div>
+            <input type="text" name="q" placeholder="Search Google or enter URL..." autocomplete="off">
+            <button type="submit" class="search-action-btn" title="Search">🔍</button>
+        </form>
+
+        <!-- Shortcut Icons Grid -->
+        <div class="shortcuts-grid">
+            <!-- Study Hub -->
+            <a href="index.html" class="shortcut-card">
+                <div class="icon-box" style="background: linear-gradient(135deg, #059669, #34d399);">📚</div>
+                <span>Study Hub</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: #ff0000;">▶️</div>
+                <span>YouTube</span>
+            </a>
+
+            <!-- Google -->
+            <a href="https://www.google.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: #ffffff; color: #4285F4;">🌐</div>
+                <span>Google</span>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: #1877f2;">👥</div>
+                <span>Facebook</span>
+            </a>
+
+            <!-- UC Web -->
+            <a href="https://www.ucweb.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: linear-gradient(135deg, #ff5722, #ff9800);">⚡</div>
+                <span>UC Web</span>
+            </a>
+
+            <!-- Opera -->
+            <a href="https://www.opera.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: #ff1b22;">🔴</div>
+                <span>Opera</span>
+            </a>
+
+            <!-- VidMate -->
+            <a href="https://www.vidmateapp.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: linear-gradient(135deg, #f59e0b, #ea580c);">📥</div>
+                <span>VidMate</span>
+            </a>
+
+            <!-- Ask AI -->
+            <a href="https://chatgpt.com" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: #10a37f;">🤖</div>
+                <span>Ask AI</span>
+            </a>
+
+            <!-- VPN / Tools -->
+            <a href="https://1.1.1.1" class="shortcut-card" target="_blank">
+                <div class="icon-box" style="background: #3b82f6;">🛡️</div>
+                <span>VPN Fast</span>
+            </a>
+
+            <!-- History -->
+            <a href="#" onclick="alert('History feature active')" class="shortcut-card">
+                <div class="icon-box" style="background: #64748b;">🕒</div>
+                <span>History</span>
+            </a>
+
+            <!-- Bookmark -->
+            <a href="#" onclick="alert('Saved to Bookmarks')" class="shortcut-card">
+                <div class="icon-box" style="background: #8b5cf6;">🔖</div>
+                <span>Bookmarks</span>
+            </a>
+
+            <!-- More / Apps -->
+            <a href="#" onclick="alert('More features coming soon!')" class="shortcut-card">
+                <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">➕</div>
+                <span>More</span>
+            </a>
+        </div>
+
+        <!-- Privacy / Incognito PRO banner -->
+        <div class="privacy-box">
+            <div class="privacy-info">
+                <h4>🔒 Private Incognito PRO</h4>
+                <p>Browsing history, cache and cookies are not saved securely.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Mugdho Portal. Powered by UC & Chrome Engine 🔥</p>
+        </footer>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <button class="nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span>🏠</span>
+            <span>Home</span>
+        </button>
+        <button class="nav-item" onclick="window.history.back()">
+            <span>◀️</span>
+            <span>Back</span>
+        </button>
+        <button class="nav-item active" onclick="location.reload()">
+            <span>🔄</span>
+            <span>Refresh</span>
+        </button>
+        <button class="nav-item" onclick="alert('Tabs: 1 active tab')">
+            <span>📑</span>
+            <span>Tabs</span>
+        </button>
+        <button class="nav-item" onclick="alert('Mugdho Portal Options')">
+            <span>☰</span>
+            <span>Menu</span>
+        </button>
     </div>
 </body>
 </html>
