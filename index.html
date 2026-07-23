@@ -20,7 +20,7 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            padding-bottom: 75px;
+            padding-bottom: 90px;
         }
         .body-incognito {
             background: linear-gradient(135deg, #05020a, #12091f, #020105) !important;
@@ -392,6 +392,7 @@
             justify-content: space-around;
             align-items: center;
             padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
             backdrop-filter: blur(20px);
             z-index: 999;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
@@ -670,7 +671,6 @@
     </div>
 
     <script>
-        // Updated News Feed Pool with requested categories
         const feedItemsPool = [
             { title: "সাম্প্রতিক সংবাদ: দেশের অর্থনীতি ও প্রযুক্তিতে নতুন বিপ্লব এবং আধুনিক উদ্ভাবন", category: "গুগল নিউজ • ১০ মিনিট আগে", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600", link: "https://www.google.com/search?q=bangladesh+news+latest" },
             { title: "বহুল প্রচলিত খবর: বিশ্ব রাজনীতি ও আন্তর্জাতিক বাজারে সাম্প্রতিক বড় পরিবর্তন", category: "ট্রেন্ডিং খবর • ৩০ মিনিট আগে", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600", link: "https://www.google.com/search?q=global+trending+news" },
@@ -711,7 +711,6 @@
 
         loadMoreContent();
 
-        // Infinite Scroll
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
                 if (loadingSpinner.style.display !== 'block') {
@@ -720,7 +719,6 @@
             }
         });
 
-        // Search Engine Selection
         const searchForm = document.getElementById('searchForm');
         const searchEngine = document.getElementById('searchEngine');
         const searchInput = document.getElementById('searchInput');
@@ -735,7 +733,6 @@
             searchInput.name = nameAttr;
         }
 
-        // Local Search History Logic
         let incognitoActive = false;
         function saveSearchHistory(e) {
             const query = searchInput.value.trim();
@@ -775,7 +772,6 @@
             showMsg('🗑️ Local history cleared.');
         }
 
-        // Multi-Tabs Management
         let tabs = [{ id: 1, title: 'Mugdho Portal - Home' }];
         function openTabsModal() {
             const container = document.getElementById('tabsListContainer');
@@ -811,7 +807,6 @@
             openTabsModal();
         }
 
-        // Direct Google Lens Image Upload / Camera Trigger
         function openGoogleLens() {
             showMsg('📷 Select an image for Google Lens search...');
             document.getElementById('lensFileInput').click();
@@ -821,7 +816,6 @@
             const file = event.target.files[0];
             if (file) {
                 showMsg('🔍 Uploading to Google Lens...');
-                // Opens Google Images search page optimized for image upload lookup (Direct Lens web route)
                 window.open('https://images.google.com/', '_blank');
             }
         }
