@@ -147,55 +147,25 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            position: relative;
-            padding: 4px 8px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .engine-icon-container:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
         .engine-logo {
             width: 22px;
             height: 22px;
             object-fit: contain;
         }
-        .engine-name-label {
-            font-size: 12px;
+        .search-select {
+            background: transparent;
+            border: none;
+            color: #00d2ff;
+            font-size: 13px;
             font-weight: 600;
-            color: #00d2ff;
-        }
-        
-        /* Engine Selector Popup Modal inside Search Box */
-        .engine-dropdown {
-            position: absolute;
-            top: 45px;
-            left: 0;
-            background: #140f2b;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-            border-radius: 14px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-            display: none;
-            flex-direction: column;
-            width: 140px;
-            z-index: 100;
-            overflow: hidden;
-        }
-        .engine-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 12px;
-            font-size: 12px;
-            color: #fff;
+            outline: none;
             cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .engine-option:hover {
-            background: rgba(0, 210, 255, 0.15);
-            color: #00d2ff;
+        .search-select option {
+            background: #1b143f;
+            color: #fff;
         }
-
         .search-input {
             flex-grow: 1;
             background: transparent;
@@ -228,6 +198,7 @@
             height: 22px;
             object-fit: contain;
         }
+        /* গুগল লেন্স আইকন পারফেক্ট সাইজ ও ক্লিয়ার রাখার জন্য */
         .lens-icon-fix {
             width: 22px !important;
             height: 22px !important;
@@ -612,36 +583,22 @@
 
         <!-- Advanced Omnibox -->
         <form class="search-box" action="https://www.google.com/search" method="GET" target="_blank" id="searchForm" onsubmit="saveSearchHistory(event)">
-            <div class="engine-icon-container" onclick="toggleEngineDropdown(event)">
+            <div class="engine-icon-container">
                 <img id="selectedEngineLogo" src="https://api.iconify.design/logos:google-icon.svg" class="engine-logo" alt="Engine Icon">
-                <span class="engine-name-label" id="selectedEngineName">Google</span>
-                
-                <!-- Custom Engine Dropdown Menu -->
-                <div class="engine-dropdown" id="engineDropdown">
-                    <div class="engine-option" onclick="selectSearchEngine('https://www.google.com/search?q=', 'https://api.iconify.design/logos:google-icon.svg', 'Google', 'q', true)">
-                        <img src="https://api.iconify.design/logos:google-icon.svg" width="18" height="18"> Google
-                    </div>
-                    <div class="engine-option" onclick="selectSearchEngine('https://duckduckgo.com/?q=', 'https://api.iconify.design/logos:duckduckgo.svg', 'DuckDuckGo', 'q', false)">
-                        <img src="https://api.iconify.design/logos:duckduckgo.svg" width="18" height="18"> DuckDuckGo
-                    </div>
-                    <div class="engine-option" onclick="selectSearchEngine('https://yandex.com/search/?text=', 'https://api.iconify.design/logos:yandex.svg', 'Yandex', 'text', false)">
-                        <img src="https://api.iconify.design/logos:yandex.svg" width="18" height="18"> Yandex
-                    </div>
-                    <div class="engine-option" onclick="selectSearchEngine('https://www.bing.com/search?q=', 'https://api.iconify.design/logos:microsoft-icon.svg', 'Bing', 'q', false)">
-                        <img src="https://api.iconify.design/logos:microsoft-icon.svg" width="18" height="18"> Bing
-                    </div>
-                </div>
+                <select class="search-select" id="searchEngine" onchange="updateEngineIcon(this)">
+                    <option value="https://www.google.com/search?q=" data-icon="https://api.iconify.design/logos:google-icon.svg">Google</option>
+                    <option value="https://duckduckgo.com/?q=" data-icon="https://api.iconify.design/logos:duckduckgo.svg">DuckDuckGo</option>
+                    <option value="https://yandex.com/search/?text=" data-icon="https://api.iconify.design/logos:yandex.svg">Yandex</option>
+                    <option value="https://www.bing.com/search?q=" data-icon="https://api.iconify.design/logos:microsoft-icon.svg">Bing</option>
+                </select>
             </div>
-
-            <input type="text" class="search-input" id="searchInput" name="q" placeholder="সার্চ করুন অথবা URL লিখুন..." autocomplete="off">
-            
+            <input type="text" class="search-input" id="searchInput" name="q" placeholder="Google এ সার্চ করুন অথবা URL লিখুন..." autocomplete="off">
             <div class="search-action-icons">
                 <button type="button" class="action-icon-btn" onclick="startVoiceSearch()" title="Voice Search">
                     <img src="https://api.iconify.design/material-symbols:mic.svg" alt="Voice">
                 </button>
-                <!-- Dynamic Lens / Web Search Button -->
-                <button type="button" class="action-icon-btn" id="rightActionBtn" onclick="handleRightAction()" title="Google Lens / Search">
-                    <img id="rightActionIcon" src="https://api.iconify.design/fluent:camera-search-24-regular.svg" class="lens-icon-fix" alt="Lens">
+                <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">
+                    <img src="https://api.iconify.design/fluent:camera-search-24-regular.svg" class="lens-icon-fix" alt="Google Lens">
                 </button>
             </div>
         </form>
@@ -769,46 +726,17 @@
         });
 
         const searchForm = document.getElementById('searchForm');
+        const searchEngine = document.getElementById('searchEngine');
         const searchInput = document.getElementById('searchInput');
         const selectedEngineLogo = document.getElementById('selectedEngineLogo');
-        const selectedEngineName = document.getElementById('selectedEngineName');
-        const engineDropdown = document.getElementById('engineDropdown');
-        const rightActionIcon = document.getElementById('rightActionIcon');
 
-        let isGoogleEngine = true;
-
-        function toggleEngineDropdown(event) {
-            event.stopPropagation();
-            engineDropdown.style.display = engineDropdown.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        window.addEventListener('click', () => {
-            engineDropdown.style.display = 'none';
-        });
-
-        function selectSearchEngine(actionUrl, logoUrl, name, paramName, isGoogle) {
-            searchForm.action = actionUrl;
-            selectedEngineLogo.src = logoUrl;
-            selectedEngineName.innerText = name;
-            searchInput.name = paramName;
-            isGoogleEngine = isGoogle;
-
-            if (isGoogle) {
-                rightActionIcon.src = "https://api.iconify.design/fluent:camera-search-24-regular.svg";
-                rightActionIcon.alt = "Google Lens";
-            } else {
-                rightActionIcon.src = "https://api.iconify.design/material-symbols:search.svg";
-                rightActionIcon.alt = "Search";
-            }
-            engineDropdown.style.display = 'none';
-        }
-
-        function handleRightAction() {
-            if (isGoogleEngine) {
-                openGoogleLens();
-            } else {
-                searchForm.submit();
-            }
+        function updateEngineIcon(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            selectedEngineLogo.src = selectedOption.getAttribute('data-icon');
+            searchForm.action = selectedOption.value;
+            let nameAttr = 'q';
+            if(selectedOption.value.includes('yandex')) nameAttr = 'text';
+            searchInput.name = nameAttr;
         }
 
         let incognitoActive = false;
