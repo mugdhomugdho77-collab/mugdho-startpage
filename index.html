@@ -1,15 +1,21 @@
-<!DOCTYPE html>
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .google-icon-wrap svg {
+            width: 18px;
+            height: 18px;
+        }
+        .search-input {<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mugdho Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0f19;
             --card-bg: rgba(255, 255, 255, 0.05);
-            --card-hover: rgba(255, 255, 255, 0.1);
+            --card-hover: rgba(255, 255, 255, 0.09);
             --accent-glow: #00f2fe;
             --text-color: #ffffff;
             --text-secondary: #94a3b8;
@@ -19,7 +25,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -35,84 +41,521 @@
 
         /* Header Logo */
         .header-logo {
-            margin-top: 12px;
+            margin-top: 25px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .header-logo .bot-icon {
-            font-size: 1.5rem;
         }
         .header-logo h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.6rem;
-            background: linear-gradient(45deg, #00f2fe, #ff0844);
+            font-size: 2rem;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #ff0844);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 400;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        /* Top Action Buttons */
+        /* Top Quick Actions Bar */
         .top-actions {
             display: flex;
-            gap: 8px;
-            margin: 10px 0;
+            gap: 12px;
+            margin: 20px 0;
             overflow-x: auto;
             max-width: 95%;
-            padding: 6px 10px;
+            padding: 5px;
             scrollbar-width: none;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
         }
         .top-actions::-webkit-scrollbar {
             display: none;
         }
         .action-btn {
-            background: rgba(255, 255, 255, 0.06);
+            background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
             color: var(--text-color);
-            font-size: 0.72rem;
-            font-weight: 500;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
             white-space: nowrap;
-            transition: 0.2s;
         }
-        .action-btn:hover, .action-btn.active {
+        .action-btn:hover {
             background: var(--card-hover);
             border-color: var(--accent-glow);
         }
 
-        /* Search Bar */
+        /* Google Style Search Bar */
         .search-container {
             width: 90%;
             max-width: 650px;
             background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            padding: 8px 16px;
-            margin-bottom: 20px;
+            padding: 10px 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            transition: 0.3s;
+        }
+        .search-container:focus-within {
+            border-color: #4facfe;
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
         }
         .google-icon-wrap {
             display: flex;
             align-items: center;
-            margin-right: 10px;
+            gap: 6px;
+            margin-right: 12px;
             cursor: pointer;
         }
         .google-icon-wrap svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
         }
         .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+        .search-tools {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+        .search-tool-icon {
+            cursor: pointer;
+            opacity: 0.8;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .search-tool-icon:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Shortcuts Grid */
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 650px;
+            margin-bottom: 30px;
+        }
+        .shortcut-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 14px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: 0.3s;
+        }
+        .shortcut-card:hover {
+            background: var(--card-hover);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .shortcut-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .shortcut-icon img, .shortcut-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+        .shortcut-title {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Feed Section */
+        .feed-header {
+            width: 90%;
+            max-width: 650px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .feed-header h3 {
+            font-size: 0.95rem;
+            color: var(--accent-glow);
+            letter-spacing: 0.5px;
+        }
+        .refresh-feed-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+        .refresh-feed-btn:hover {
+            color: var(--text-color);
+        }
+
+        .feed-container {
+            width: 90%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .feed-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .feed-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .feed-thumb {
+            width: 100%;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-overlay {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+        .feed-content {
+            padding: 14px;
+        }
+        .feed-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .feed-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        .nav-item.active, .nav-item:hover {
+            color: var(--accent-glow);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Logo -->
+    <div class="header-logo">
+        <h1>Mugdho Portal</h1>
+    </div>
+
+    <!-- Top Action Buttons -->
+    <div class="top-actions">
+        <button class="action-btn" onclick="toggleVPN()">🛡️ VPN Off</button>
+        <button class="action-btn" onclick="toggleIncognito()">🕵️ Incognito</button>
+        <button class="action-btn" onclick="toggleDesktop()">💻 Desktop</button>
+        <button class="action-btn" onclick="openHistory()">🕒 History</button>
+        <button class="action-btn" onclick="addBookmark()">⭐ Bookmark</button>
+    </div>
+
+    <!-- Google Style Search Bar -->
+    <div class="search-container">
+        <div class="google-icon-wrap" title="Google Search">
+            <!-- Google G Logo SVG -->
+            <svg viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.17 21.32 7.23 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 12s.43 3.87 1.18 5.39l4.09-3.15z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+            </svg>
+            <svg viewBox="0 0 24 24" style="width: 10px; height: 10px; fill: #94a3b8;">
+                <path d="M7 10l5 5 5-5z"/>
+            </svg>
+        </div>
+        <input type="text" class="search-input" id="searchInput" placeholder="সার্চ করুন বা URL লিখুন..." onkeypress="handleSearch(event)">
+        
+        <div class="search-tools">
+            <!-- Google Voice Search Icon -->
+            <div class="search-tool-icon" onclick="startVoiceSearch()" title="Search by voice">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+            </div>
+            <!-- Google Lens Icon -->
+            <div class="search-tool-icon" onclick="openGoogleLens()" title="Search by image">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8">
+                    <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM3 5v2c0 1.1.9 2 2 2h2V7H5V5h2V3H5c-1.1 0-2 .9-2 2zm16 0v2h-2v2h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-2v2h2zM3 19v-2h2v2h2v2H5c-1.1 0-2-.9-2-2zm18 0c0 1.1-.9 2-2 2h-2v-2h2v-2h2v2z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shortcuts Grid -->
+    <div class="shortcuts-grid">
+        <a href="https://chatgpt.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #10a37f;">🤖</div>
+            <span class="shortcut-title">ChatGPT</span>
+        </a>
+        <a href="https://gemini.google.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #4facfe;">✨</div>
+            <span class="shortcut-title">Gemini</span>
+        </a>
+        <a href="https://github.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #fff;">🐙</div>
+            <span class="shortcut-title">GitHub</span>
+        </a>
+        <a href="https://youtube.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #ff0000;">▶️</div>
+            <span class="shortcut-title">YouTube</span>
+        </a>
+        <a href="https://facebook.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #1877f2;">👥</div>
+            <span class="shortcut-title">Facebook</span>
+        </a>
+        <a href="https://whatsapp.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #25d366;">💬</div>
+            <span class="shortcut-title">WhatsApp</span>
+        </a>
+        <a href="https://vercel.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #fff;">▲</div>
+            <span class="shortcut-title">Vercel</span>
+        </a>
+        <a href="https://gmail.com" class="shortcut-card">
+            <div class="shortcut-icon" style="color: #ea4335;">✉️</div>
+            <span class="shortcut-title">Gmail</span>
+        </a>
+    </div>
+
+    <!-- Feed Section with YouTube Style Refresh -->
+    <div class="feed-header">
+        <h3>Google Discover & Trending Live Feed</h3>
+        <button class="refresh-feed-btn" onclick="refreshFeed()">
+            🔄 নতুন ফিড লোড করুন
+        </button>
+    </div>
+
+    <div class="feed-container" id="feedContainer">
+        <!-- Dynamically populated via JS -->
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <button class="nav-item" onclick="history.back()">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back
+        </button>
+        <button class="nav-item active" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Home
+        </button>
+        <button class="nav-item" onclick="openTabs()">
+            <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+            Tabs
+        </button>
+        <button class="nav-item" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
+            <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+            Top
+        </button>
+    </div>
+
+    <script>
+        // YouTube-style Refreshable Feed Items Database
+        const feedDatabase = [
+            {
+                title: "2026 FIFA World Cup: Global Teams Gear Up for the Ultimate Clash in North America",
+                category: "Sports • 1 hour ago",
+                image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Bangladesh Tech Sector Expands Rapidly with Next-Gen AI and Software Innovations",
+                category: "Technology • 3 hours ago",
+                image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Top 10 Thriller & Horror Masterpieces You Need to Watch This Season",
+                category: "Entertainment & Movies • 4 hours ago",
+                image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Global Stock Markets React to Latest Breakthroughs in Artificial Intelligence",
+                category: "World Business • 5 hours ago",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Exploring the Scenic Beauty and Modern Growth of Khulna Division",
+                category: "National • 6 hours ago",
+                image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Latest Smartphone Camera Technologies and Mobile Photography Tips",
+                category: "Gadgets • 7 hours ago",
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Hollywood Blockbuster Movie Trailers and Upcoming Sci-Fi Releases",
+                category: "Movie Clips • 8 hours ago",
+                image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // Shuffle and render feed (YouTube style refresh)
+        function refreshFeed() {
+            const container = document.getElementById('feedContainer');
+            container.innerHTML = '';
+            
+            // Randomize array order
+            const shuffled = [...feedDatabase].sort(() => 0.5 - Math.random());
+            
+            shuffled.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'feed-card';
+                card.innerHTML = `
+                    <div class="feed-thumb" style="background-image: url('${item.image}')">
+                        <div class="play-overlay">▶</div>
+                    </div>
+                    <div class="feed-content">
+                        <div class="feed-title">${item.title}</div>
+                        <div class="feed-meta">
+                            <span>${item.category}</span>
+                            <span>Google Discover</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initial load
+        window.onload = function() {
+            refreshFeed();
+        };
+
+        // Search Handler & Local Storage History Logic
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                let query = document.getElementById('searchInput').value.trim();
+                if (query) {
+                    // Save to local storage history
+                    let history = JSON.parse(localStorage.getItem('search_history') || '[]');
+                    history.unshift(query);
+                    localStorage.setItem('search_history', JSON.stringify(history));
+
+                    // Check if URL or Search query
+                    if (query.startsWith('http://') || query.startsWith('https://') || (query.includes('.') && !query.includes(' '))) {
+                        window.location.href = query.startsWith('http') ? query : 'https://' + query;
+                    } else {
+                        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                    }
+                }
+            }
+        }
+
+        function startVoiceSearch() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'bn-BD';
+                recognition.onresult = function(event) {
+                    document.getElementById('searchInput').value = event.results[0][0].transcript;
+                };
+                recognition.start();
+            } else {
+                alert('এই ব্রাউজারে ভয়েস সার্চ সাপোর্ট করে না!');
+            }
+        }
+
+        function openGoogleLens() {
+            alert('Google Lens ফিচারটি চালু হচ্ছে...');
+            window.location.href = 'https://lens.google.com';
+        }
+
+        function toggleVPN() { alert('VPN Mode Toggled'); }
+        function toggleIncognito() { alert('Incognito Mode Toggled'); }
+        function toggleDesktop() { alert('Desktop Site Mode Toggled'); }
+        function openHistory() { 
+            let history = JSON.parse(localStorage.getItem('search_history') || '[]');
+            alert('সাম্প্রতিক সার্চ হিস্ট্রি:\n\n' + (history.length ? history.join('\n') : 'কোনো হিস্ট্রি নেই!'));
+        }
+        function addBookmark() { 
+            alert('এই পেজটি বুকমার্ক করা হয়েছে!'); 
+        }
+        function openTabs() {
+            alert('বর্তমানে ১টি ট্যাব খোলা আছে।');
+        }
+    </script>
+</body>
+</html>
+
             flex: 1;
             background: transparent;
             border: none;
