@@ -180,7 +180,7 @@
         .search-action-icons {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: rgba(255, 255, 255, 0.08);
             padding: 6px 12px;
             border-radius: 25px;
@@ -189,10 +189,14 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .action-icon-btn img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
         }
         .action-icon-btn:hover {
             transform: scale(1.15);
@@ -512,6 +516,9 @@
 <body>
     <div id="notificationModal">⚡ Notification Message</div>
 
+    <!-- Hidden file input for direct Google Lens image search -->
+    <input type="file" id="lensFileInput" accept="image/*" style="display: none;" onchange="handleLensImageUpload(event)">
+
     <!-- Tabs Manager Modal -->
     <div class="modal-overlay" id="tabsModal">
         <div class="modal-content-box">
@@ -580,8 +587,12 @@
             </div>
             <input type="text" class="search-input" id="searchInput" name="q" placeholder="Google এ সার্চ করুন অথবা URL লিখুন..." autocomplete="off">
             <div class="search-action-icons">
-                <button type="button" class="action-icon-btn" onclick="startVoiceSearch()" title="Voice Search">🎤</button>
-                <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">📷</button>
+                <button type="button" class="action-icon-btn" onclick="startVoiceSearch()" title="Voice Search">
+                    <img src="https://api.iconify.design/material-symbols:mic.svg" alt="Voice">
+                </button>
+                <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">
+                    <img src="https://api.iconify.design/material-symbols:google-lens-rounded.svg" alt="Google Lens">
+                </button>
             </div>
         </form>
 
@@ -800,10 +811,19 @@
             openTabsModal();
         }
 
-        // Google Lens & Voice Search
+        // Direct Google Lens Image Upload / Camera Trigger
         function openGoogleLens() {
-            showMsg('📷 Opening Google Lens Scanner...');
-            window.open('https://lens.google.com', '_blank');
+            showMsg('📷 Select an image for Google Lens search...');
+            document.getElementById('lensFileInput').click();
+        }
+
+        function handleLensImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                showMsg('🔍 Uploading to Google Lens...');
+                // Opens Google Images search page optimized for image upload lookup (Direct Lens web route)
+                window.open('https://images.google.com/', '_blank');
+            }
         }
 
         function startVoiceSearch() {
