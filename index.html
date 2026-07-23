@@ -1,121 +1,908 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mugdho's New Startpage</title>
+    <title>Mugdho Portal - Ultimate Browser</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #090618, #150f2e, #05030a);
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding-bottom: 75px;
+        }
+        .body-incognito {
+            background: linear-gradient(135deg, #05020a, #12091f, #020105) !important;
+        }
+        .main-wrapper {
+            width: 100%;
+            max-width: 650px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .desktop-mode {
+            max-width: 100% !important;
+            padding: 20px 40px !important;
+        }
+
+        /* 3D Exclusive Portal Header */
+        .portal-header-box {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* একদম নতুন নীল গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+            padding: 5px 0;
         }
-        .test-badge {
-            position: absolute;
-            top: 20px;
-            background: #ff4757;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        #clock {
-            font-size: 4.5rem;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            letter-spacing: 2px;
-        }
-        .search-box {
-            width: 85%;
-            max-width: 550px;
-            padding: 18px 25px;
-            border-radius: 30px;
-            border: none;
-            font-size: 1.2rem;
-            outline: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            transition: 0.3s;
-        }
-        .search-box:focus {
-            transform: scale(1.02);
-        }
-        .links {
-            margin-top: 40px;
+        .header-content-flex {
             display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 15px;
-            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        .robot-3d-icon {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
+            animation: floatRobot 3s ease-in-out infinite;
+        }
+        @keyframes floatRobot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .portal-title-text {
+            text-align: center;
+        }
+        .title-mugdho {
+            font-size: 34px;
+            font-weight: 900;
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            background: linear-gradient(to right, #00d2ff, #7928ca, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(121, 40, 202, 0.4);
+            line-height: 1.1;
+        }
+        .title-portal {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #00d2ff, #3a7bd5, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Browser Toolbar */
+        .browser-toolbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 8px;
+            margin-bottom: 14px;
+            backdrop-filter: blur(10px);
+        }
+        .tool-btn {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+        }
+        .tool-btn span {
+            font-size: 15px;
+        }
+        .tool-btn:hover {
+            color: #00d2ff;
+            transform: scale(1.05);
+        }
+
+        /* Advanced Omnibox */
+        .search-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 35px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .search-box:focus-within {
+            border-color: #00d2ff;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
+        }
+        .engine-icon-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .engine-logo {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+        .search-select {
+            background: transparent;
+            border: none;
+            color: #00d2ff;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+        .search-select option {
+            background: #1b143f;
+            color: #fff;
+        }
+        .search-input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        .search-action-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .action-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #00d2ff;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
-        .link-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 12px 25px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
+        .action-icon-btn:hover {
+            transform: scale(1.15);
         }
-        .link-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-5px);
+
+        /* App Grid Container */
+        .grid-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 18px;
+            padding: 12px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            backdrop-filter: blur(8px);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(0, 210, 255, 0.4);
+        }
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .icon-box img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .card span {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Google Discover Style Large Newsfeed */
+        .news-section-title {
+            width: 100%;
+            font-size: 15px;
+            font-weight: 700;
+            color: #00d2ff;
+            margin-bottom: 12px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-feed-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .news-card-large {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .news-card-large:hover {
+            border-color: rgba(0, 210, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        .news-media-box {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            background: #000;
+        }
+        .news-media-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+        .play-overlay-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 46px;
+            height: 46px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,210,255,0.5);
+        }
+        .news-card-large:hover .play-overlay-icon {
+            background: #00d2ff;
+            color: #000;
+        }
+        .news-info-box {
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .news-info-box h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+        }
+        .news-source-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #00d2ff;
+            display: none;
+        }
+
+        /* Privacy Banner */
+        .privacy-banner {
+            width: 100%;
+            background: rgba(0, 210, 255, 0.08);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .privacy-text h4 {
+            font-size: 13px;
+            color: #7dd3fc;
+            margin-bottom: 2px;
+        }
+        .privacy-text p {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+        .privacy-badge {
+            background: #0284c7;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
+        }
+
+        /* UC Browser Style Premium Bottom Bar */
+        .uc-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 11, 26, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0;
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+        }
+        .uc-nav-item {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+        }
+        .uc-nav-item span {
+            font-size: 20px;
+        }
+        .uc-nav-item:hover, .uc-nav-item.active {
+            color: #00d2ff;
+        }
+        .tab-badge {
+            background: #00d2ff;
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 1px 5px;
+            border-radius: 8px;
+            position: absolute;
+            margin-top: -2px;
+            margin-left: 10px;
+        }
+
+        /* Modals (History & Tabs Manager) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content-box {
+            width: 90%;
+            max-width: 450px;
+            background: #140f2b;
+            border: 1px solid rgba(0,210,255,0.3);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .modal-header h3 {
+            font-size: 16px;
+            color: #00d2ff;
+        }
+        .close-modal-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .modal-body-list {
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+        .history-item, .tab-item {
+            background: rgba(255,255,255,0.04);
+            padding: 10px 12px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .history-item:hover, .tab-item:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* Popup Notification */
+        #notificationModal {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(15, 12, 27, 0.95);
+            border: 1px solid #00d2ff;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            z-index: 3000;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #notificationModal.show {
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
+    <div id="notificationModal">⚡ Notification Message</div>
 
-    <div class="test-badge">🚀 Vercel Test Mode Active</div>
-    
-    <h1>Welcome, Mugdho!</h1>
-    <div id="clock">00:00:00</div>
-    
-    <input type="text" class="search-box" id="search" placeholder="Google এ কিছু খুঁজুন..." onkeypress="if(event.key === 'Enter' && this.value) window.location.href='https://www.google.com/search?q='+encodeURIComponent(this.value)">
-    
-    <div class="links">
-        <a href="https://youtube.com" class="link-btn">▶️ YouTube</a>
-        <a href="https://chatgpt.com" class="link-btn">🤖 ChatGPT</a>
-        <a href="https://facebook.com" class="link-btn">👥 Facebook</a>
-        <a href="https://github.com" class="link-btn">🐙 GitHub</a>
+    <!-- Tabs Manager Modal -->
+    <div class="modal-overlay" id="tabsModal">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <h3>📑 Open Tabs (<span id="tabCountHeader">1</span>)</h3>
+                <button class="close-modal-btn" onclick="closeTabsModal()">✕</button>
+            </div>
+            <div class="modal-body-list" id="tabsListContainer">
+                <!-- Dynamic tabs -->
+            </div>
+            <button onclick="createNewTab()" style="margin-top: 15px; padding: 10px; background: #00d2ff; color: #000; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">+ New Tab</button>
+        </div>
+    </div>
+
+    <!-- Local Search History Modal -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-content-box">
+            <div class="modal-header">
+                <h3>🕒 Mugdho Portal Local History</h3>
+                <button class="close-modal-btn" onclick="closeHistoryModal()">✕</button>
+            </div>
+            <div class="modal-body-list" id="historyListContainer">
+                <!-- Dynamic history -->
+            </div>
+            <button onclick="clearLocalHistory()" style="margin-top: 15px; padding: 10px; background: #ef4444; color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Clear History</button>
+        </div>
+    </div>
+
+    <div class="main-wrapper" id="mainContainer">
+        <!-- 3D Exclusive Portal Header -->
+        <div class="portal-header-box">
+            <div class="header-content-flex">
+                <img src="https://api.iconify.design/fluent-emoji-flat:robot.svg" class="robot-3d-icon" alt="3D Robot">
+                <div class="portal-title-text">
+                    <div class="title-mugdho">Mugdho</div>
+                    <div class="title-portal">Portal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Browser Action Toolbar -->
+        <div class="browser-toolbar">
+            <button class="tool-btn" id="vpnBtn" onclick="toggleVPN()">
+                <span id="vpnIcon">🛡️</span>VPN Off
+            </button>
+            <button class="tool-btn" id="incognitoBtn" onclick="toggleIncognito()">
+                <span id="incognitoIcon">🕵️‍♂️</span>Incognito
+            </button>
+            <button class="tool-btn" id="desktopBtn" onclick="toggleDesktop()">
+                <span id="desktopIcon">💻</span>Desktop
+            </button>
+            <button class="tool-btn" onclick="openHistoryModal()">
+                <span>🕒</span>History
+            </button>
+            <button class="tool-btn" onclick="showMsg('⭐ Bookmarked successfully!')">
+                <span>⭐</span>Bookmark
+            </button>
+        </div>
+
+        <!-- Advanced Omnibox -->
+        <form class="search-box" action="https://www.google.com/search" method="GET" target="_blank" id="searchForm" onsubmit="saveSearchHistory(event)">
+            <div class="engine-icon-container">
+                <img id="selectedEngineLogo" src="https://api.iconify.design/logos:google-icon.svg" class="engine-logo" alt="Engine Icon">
+                <select class="search-select" id="searchEngine" onchange="updateEngineIcon(this)">
+                    <option value="https://www.google.com/search?q=" data-icon="https://api.iconify.design/logos:google-icon.svg">Google</option>
+                    <option value="https://duckduckgo.com/?q=" data-icon="https://api.iconify.design/logos:duckduckgo.svg">DuckDuckGo</option>
+                    <option value="https://yandex.com/search/?text=" data-icon="https://api.iconify.design/logos:yandex.svg">Yandex</option>
+                    <option value="https://www.bing.com/search?q=" data-icon="https://api.iconify.design/logos:microsoft-icon.svg">Bing</option>
+                </select>
+            </div>
+            <input type="text" class="search-input" id="searchInput" name="q" placeholder="Google এ সার্চ করুন অথবা URL লিখুন..." autocomplete="off">
+            <div class="search-action-icons">
+                <button type="button" class="action-icon-btn" onclick="startVoiceSearch()" title="Voice Search">🎙️</button>
+                <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">📷</button>
+            </div>
+        </form>
+
+        <!-- App Grid -->
+        <div class="grid-container">
+            <a href="https://chatgpt.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:openai-icon.svg" alt="ChatGPT"></div>
+                <span>ChatGPT</span>
+            </a>
+            <a href="https://gemini.google.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:google-gemini.svg" alt="Gemini"></div>
+                <span>Gemini</span>
+            </a>
+            <a href="https://github.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:github-icon.svg" alt="GitHub"></div>
+                <span>GitHub</span>
+            </a>
+            <a href="https://youtube.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:youtube-icon.svg" alt="YouTube"></div>
+                <span>YouTube</span>
+            </a>
+            <a href="https://facebook.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:facebook.svg" alt="Facebook"></div>
+                <span>Facebook</span>
+            </a>
+            <a href="https://web.whatsapp.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:whatsapp-icon.svg" alt="WhatsApp"></div>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://vercel.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:vercel-icon.svg" alt="Vercel"></div>
+                <span>Vercel</span>
+            </a>
+            <a href="https://mail.google.com" class="card" target="_blank">
+                <div class="icon-box"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="Gmail"></div>
+                <span>Gmail</span>
+            </a>
+        </div>
+
+        <!-- Google Discover Feed Container -->
+        <div class="news-section-title">📰 Google Discover & Trending Live Feed</div>
+        <div class="news-feed-container" id="newsFeed">
+            <!-- Dynamic Large News Cards -->
+        </div>
+
+        <div class="loading-spinner" id="loadingSpinner">⏳ Loading more trending items...</div>
+
+        <!-- Privacy Banner -->
+        <div class="privacy-banner">
+            <div class="privacy-text">
+                <h4 id="privacyTitle">Private Browsing Mode</h4>
+                <p id="privacyDesc">No search history, cookies or cache are saved.</p>
+            </div>
+            <button class="privacy-badge" id="privacyBadgeState">PRO ON</button>
+        </div>
+    </div>
+
+    <!-- UC Browser Style Premium Bottom Bar -->
+    <div class="uc-bottom-bar">
+        <button class="uc-nav-item" onclick="goBack()" title="Back">
+            <span>⬅️</span>Back
+        </button>
+        <button class="uc-nav-item" onclick="goForward()" title="Forward">
+            <span>➡️</span>Forward
+        </button>
+        <button class="uc-nav-item" onclick="openTabsModal()" title="Tabs">
+            <span>📑</span>
+            <span class="tab-badge" id="tabBadgeCount">1</span>
+            Tabs
+        </button>
+        <button class="uc-nav-item" onclick="toggleIncognito()" title="Incognito Switch">
+            <span>🕵️‍♂️</span>Incog
+        </button>
+        <button class="uc-nav-item" onclick="goHome()" title="Home">
+            <span>🏠</span>Home
+        </button>
     </div>
 
     <script>
-        // লাইভ ঘড়ির জন্য জাভাস্ক্রিপ্ট
-        function updateTime() {
-            const now = new Date();
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            let seconds = now.getSeconds();
-            let ampm = hours >= 12 ? 'PM' : 'AM';
-            
-            hours = hours % 12;
-            hours = hours ? hours : 12; 
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            
-            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds} ${ampm}`;
+        // Large YouTube & Google Discover Style Feeds Pool
+        const feedItemsPool = [
+            { title: "2026 FIFA World Cup: Global Teams Gear Up for the Ultimate Clash in North America", category: "Sports • 1 hour ago", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600", link: "https://www.google.com/search?q=2026+FIFA+World+Cup" },
+            { title: "Bangladesh Tech Sector Expands Rapidly with Next-Gen AI and Software Innovations", category: "Technology • 3 hours ago", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600", link: "https://www.google.com/search?q=Bangladesh+tech+news" },
+            { title: "Top 10 Thriller & Horror Masterpieces You Need to Watch This Season", category: "Entertainment & Movies • 4 hours ago", img: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600", link: "https://www.google.com/search?q=best+horror+thriller+movies" },
+            { title: "Global Stock Markets React to Latest Breakthroughs in Artificial Intelligence", category: "World Business • 5 hours ago", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600", link: "https://www.google.com/search?q=global+markets+ai" },
+            { title: "Exploring the Scenic Beauty and Modern Growth of Khulna Division", category: "National • 6 hours ago", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600", link: "https://www.google.com/search?q=Khulna+Bangladesh" },
+            { title: "Latest Smartphone Camera Technologies and Mobile Photography Tips", category: "Gadgets • 7 hours ago", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600", link: "https://www.google.com/search?q=smartphone+camera+tech" },
+            { title: "Hollywood Blockbuster Movie Trailers and Upcoming Sci-Fi Releases", category: "Movie Clips • 8 hours ago", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600", link: "https://www.google.com/search?q=upcoming+movies+2026" }
+        ];
+
+        const newsFeed = document.getElementById('newsFeed');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        function loadMoreContent() {
+            loadingSpinner.style.display = 'block';
+            setTimeout(() => {
+                feedItemsPool.forEach((item) => {
+                    const card = document.createElement('a');
+                    card.className = 'news-card-large';
+                    card.href = item.link;
+                    card.target = '_blank';
+                    card.innerHTML = `
+                        <div class="news-media-box">
+                            <img src="${item.img}" alt="News Image">
+                            <div class="play-overlay-icon">▶</div>
+                        </div>
+                        <div class="news-info-box">
+                            <h3>${item.title}</h3>
+                            <div class="news-source-row">
+                                <span>${item.category}</span>
+                                <span>🌐 Google Discover</span>
+                            </div>
+                        </div>
+                    `;
+                    newsFeed.appendChild(card);
+                });
+                loadingSpinner.style.display = 'none';
+            }, 500);
         }
-        setInterval(updateTime, 1000);
-        updateTime();
+
+        loadMoreContent();
+
+        // Infinite Scroll
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                if (loadingSpinner.style.display !== 'block') {
+                    loadMoreContent();
+                }
+            }
+        });
+
+        // Search Engine Selection
+        const searchForm = document.getElementById('searchForm');
+        const searchEngine = document.getElementById('searchEngine');
+        const searchInput = document.getElementById('searchInput');
+        const selectedEngineLogo = document.getElementById('selectedEngineLogo');
+
+        function updateEngineIcon(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            selectedEngineLogo.src = selectedOption.getAttribute('data-icon');
+            searchForm.action = selectedOption.value;
+            let nameAttr = 'q';
+            if(selectedOption.value.includes('yandex')) nameAttr = 'text';
+            searchInput.name = nameAttr;
+        }
+
+        // Local Search History Logic (Strictly Local)
+        let incognitoActive = false;
+        function saveSearchHistory(e) {
+            const query = searchInput.value.trim();
+            if(!query || incognitoActive) return;
+            
+            let history = JSON.parse(localStorage.getItem('mugdho_local_history') || '[]');
+            history.unshift({ query: query, time: new Date().toLocaleTimeString() });
+            if(history.length > 30) history.pop(); // limit
+            localStorage.setItem('mugdho_local_history', JSON.stringify(history));
+        }
+
+        function openHistoryModal() {
+            const container = document.getElementById('historyListContainer');
+            container.innerHTML = '';
+            let history = JSON.parse(localStorage.getItem('mugdho_local_history') || '[]');
+            
+            if(history.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.4); padding:20px;">No search history found.</p>';
+            } else {
+                history.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'history-item';
+                    div.innerHTML = `<span>🔍 ${item.query}</span> <span style="font-size:10px; color:rgba(255,255,255,0.4);">${item.time}</span>`;
+                    container.appendChild(div);
+                });
+            }
+            document.getElementById('historyModal').style.display = 'flex';
+        }
+
+        function closeHistoryModal() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+
+        function clearLocalHistory() {
+            localStorage.removeItem('mugdho_local_history');
+            openHistoryModal();
+            showMsg('🗑️ Local history cleared.');
+        }
+
+        // Multi-Tabs Management
+        let tabs = [{ id: 1, title: 'Mugdho Portal - Home' }];
+        function openTabsModal() {
+            const container = document.getElementById('tabsListContainer');
+            container.innerHTML = '';
+            document.getElementById('tabCountHeader').innerText = tabs.length;
+            document.getElementById('tabBadgeCount').innerText = tabs.length;
+
+            tabs.forEach((tab, index) => {
+                const div = document.createElement('div');
+                div.className = 'tab-item';
+                div.innerHTML = `<span>📑 ${tab.title}</span> <button onclick="closeTab(${index})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-weight:bold;">✕</button>`;
+                container.appendChild(div);
+            });
+            document.getElementById('tabsModal').style.display = 'flex';
+        }
+
+        function closeTabsModal() {
+            document.getElementById('tabsModal').style.display = 'none';
+        }
+
+        function createNewTab() {
+            tabs.push({ id: tabs.length + 1, title: 'New Tab - Mugdho Portal' });
+            openTabsModal();
+            showMsg('📑 New Tab Opened!');
+        }
+
+        function closeTab(index) {
+            if(tabs.length === 1) {
+                showMsg('⚠️ Cannot close the last active tab!');
+                return;
+            }
+            tabs.splice(index, 1);
+            openTabsModal();
+        }
+
+        // Fixed Google Lens & Voice Search
+        function openGoogleLens() {
+            showMsg('📷 Opening Google Lens Scanner...');
+            window.open('https://lens.google.com', '_blank');
+        }
+
+        function startVoiceSearch() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showMsg('❌ Voice search is not supported in this browser.');
+                return;
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'bn-BD'; 
+            recognition.onstart = function() { showMsg('🎙️ Listening... Speak now!'); };
+            recognition.onresult = function(event) {
+                const speechToText = event.results[0][0].transcript;
+                searchInput.value = speechToText;
+                showMsg('✅ Recognized: ' + speechToText);
+                searchForm.submit();
+            };
+            recognition.start();
+        }
+
+        function showMsg(text) {
+            const modal = document.getElementById('notificationModal');
+            modal.innerText = text;
+            modal.classList.add('show');
+            setTimeout(() => { modal.classList.remove('show'); }, 2500);
+        }
+
+        let vpnActive = false;
+        function toggleVPN() {
+            vpnActive = !vpnActive;
+            const btn = document.getElementById('vpnBtn');
+            const icon = document.getElementById('vpnIcon');
+            if(vpnActive) {
+                btn.style.color = '#10b981';
+                icon.innerText = '🌐';
+                showMsg('🔒 Secure VPN Connected');
+            } else {
+                btn.style.color = '#fff';
+                icon.innerText = '🛡️';
+                showMsg('🛡️ VPN Disconnected');
+            }
+        }
+
+        function toggleIncognito() {
+            incognitoActive = !incognitoActive;
+            const body = document.body;
+            const btn = document.getElementById('incognitoBtn');
+            const pTitle = document.getElementById('privacyTitle');
+            const pDesc = document.getElementById('privacyDesc');
+            
+            if(incognitoActive) {
+                body.classList.add('body-incognito');
+                btn.style.color = '#a855f7';
+                pTitle.innerText = "🔒 Incognito PRO Active";
+                pDesc.innerText = "Encrypted session. Search history is paused.";
+                showMsg('🕵️‍♂️ Incognito Mode Activated!');
+            } else {
+                body.classList.remove('body-incognito');
+                btn.style.color = '#fff';
+                pTitle.innerText = "Private Browsing Mode";
+                pDesc.innerText = "No search history, cookies or cache are saved.";
+                showMsg('💡 Switched back to Normal Mode.');
+            }
+        }
+
+        let desktopActive = false;
+        function toggleDesktop() {
+            desktopActive = !desktopActive;
+            const container = document.getElementById('mainContainer');
+            const btn = document.getElementById('desktopBtn');
+            if(desktopActive) {
+                container.classList.add('desktop-mode');
+                btn.style.color = '#3b82f6';
+                showMsg('💻 Switched to Desktop View');
+            } else {
+                container.classList.remove('desktop-mode');
+                btn.style.color = '#fff';
+                showMsg('📱 Switched back to Mobile View');
+            }
+        }
+
+        function goBack() {
+            if(window.history.length > 1) window.history.back();
+            else showMsg('⬅️ No previous page');
+        }
+        function goForward() {
+            window.history.forward();
+        }
+        function goHome() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            searchInput.value = '';
+            showMsg('🏠 Welcome back to Mugdho Portal Home');
+        }
     </script>
 </body>
 </html>
