@@ -194,9 +194,15 @@
             justify-content: center;
         }
         .action-icon-btn img {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             object-fit: contain;
+        }
+        /* গুগল লেন্স আইকন পারফেক্ট সাইজ ও ক্লিয়ার রাখার জন্য */
+        .lens-icon-fix {
+            width: 22px !important;
+            height: 22px !important;
+            display: inline-block;
         }
         .action-icon-btn:hover {
             transform: scale(1.15);
@@ -592,7 +598,7 @@
                     <img src="https://api.iconify.design/material-symbols:mic.svg" alt="Voice">
                 </button>
                 <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">
-                    <img src="https://api.iconify.design/fluent:camera-search-24-regular.svg" alt="Google Lens">
+                    <img src="https://api.iconify.design/fluent:camera-search-24-regular.svg" class="lens-icon-fix" alt="Google Lens">
                 </button>
             </div>
         </form>
