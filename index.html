@@ -250,7 +250,7 @@
         /* Google Discover Style Large Newsfeed */
         .news-section-title {
             width: 100%;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #00d2ff;
             margin-bottom: 12px;
@@ -517,9 +517,7 @@
                 <h3>📑 Open Tabs (<span id="tabCountHeader">1</span>)</h3>
                 <button class="close-modal-btn" onclick="closeTabsModal()">✕</button>
             </div>
-            <div class="modal-body-list" id="tabsListContainer">
-                <!-- Dynamic tabs -->
-            </div>
+            <div class="modal-body-list" id="tabsListContainer"></div>
             <button onclick="createNewTab()" style="margin-top: 15px; padding: 10px; background: #00d2ff; color: #000; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">+ New Tab</button>
         </div>
     </div>
@@ -531,9 +529,7 @@
                 <h3>🕒 Mugdho Portal Local History</h3>
                 <button class="close-modal-btn" onclick="closeHistoryModal()">✕</button>
             </div>
-            <div class="modal-body-list" id="historyListContainer">
-                <!-- Dynamic history -->
-            </div>
+            <div class="modal-body-list" id="historyListContainer"></div>
             <button onclick="clearLocalHistory()" style="margin-top: 15px; padding: 10px; background: #ef4444; color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Clear History</button>
         </div>
     </div>
@@ -623,13 +619,11 @@
             </a>
         </div>
 
-        <!-- Google Discover Feed Container -->
-        <div class="news-section-title">📰 Google Discover & Trending Live Feed</div>
-        <div class="news-feed-container" id="newsFeed">
-            <!-- Dynamic Large News Cards -->
-        </div>
+        <!-- Google Discover & Trending News Feed -->
+        <div class="news-section-title">🔥 সাম্প্রতিক সংবাদ, বহুল প্রচলিত খবর ও YouTube আপডেট</div>
+        <div class="news-feed-container" id="newsFeed"></div>
 
-        <div class="loading-spinner" id="loadingSpinner">⏳ Loading more trending items...</div>
+        <div class="loading-spinner" id="loadingSpinner">⏳ আরও সংবাদ লোড হচ্ছে...</div>
 
         <!-- Privacy Banner -->
         <div class="privacy-banner">
@@ -663,15 +657,13 @@
     </div>
 
     <script>
-        // Large YouTube & Google Discover Style Feeds Pool
+        // Updated News Feed Pool with requested categories
         const feedItemsPool = [
-            { title: "2026 FIFA World Cup: Global Teams Gear Up for the Ultimate Clash in North America", category: "Sports • 1 hour ago", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600", link: "https://www.google.com/search?q=2026+FIFA+World+Cup" },
-            { title: "Bangladesh Tech Sector Expands Rapidly with Next-Gen AI and Software Innovations", category: "Technology • 3 hours ago", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600", link: "https://www.google.com/search?q=Bangladesh+tech+news" },
-            { title: "Top 10 Thriller & Horror Masterpieces You Need to Watch This Season", category: "Entertainment & Movies • 4 hours ago", img: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600", link: "https://www.google.com/search?q=best+horror+thriller+movies" },
-            { title: "Global Stock Markets React to Latest Breakthroughs in Artificial Intelligence", category: "World Business • 5 hours ago", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600", link: "https://www.google.com/search?q=global+markets+ai" },
-            { title: "Exploring the Scenic Beauty and Modern Growth of Khulna Division", category: "National • 6 hours ago", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600", link: "https://www.google.com/search?q=Khulna+Bangladesh" },
-            { title: "Latest Smartphone Camera Technologies and Mobile Photography Tips", category: "Gadgets • 7 hours ago", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600", link: "https://www.google.com/search?q=smartphone+camera+tech" },
-            { title: "Hollywood Blockbuster Movie Trailers and Upcoming Sci-Fi Releases", category: "Movie Clips • 8 hours ago", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600", link: "https://www.google.com/search?q=upcoming+movies+2026" }
+            { title: "সাম্প্রতিক সংবাদ: দেশের অর্থনীতি ও প্রযুক্তিতে নতুন বিপ্লব এবং আধুনিক উদ্ভাবন", category: "গুগল নিউজ • ১০ মিনিট আগে", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600", link: "https://www.google.com/search?q=bangladesh+news+latest" },
+            { title: "বহুল প্রচলিত খবর: বিশ্ব রাজনীতি ও আন্তর্জাতিক বাজারে সাম্প্রতিক বড় পরিবর্তন", category: "ট্রেন্ডিং খবর • ৩০ মিনিট আগে", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600", link: "https://www.google.com/search?q=global+trending+news" },
+            { title: "YouTube আপডেট: প্রযুক্তি দুনিয়ার সেরা নতুন সব গ্যাজেট এবং এআই টুলস রিভিউ", category: "YouTube টেক • ১ ঘণ্টা আগে", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600", link: "https://www.youtube.com/results?search_query=tech+news+updates" },
+            { title: "বিনোদন ও সিনেমা: এই মৌসুমের সেরা বহুল আলোচিত থ্রিলার ও হরর মুভি কালেকশন", category: "বিনোদন নিউজ • ২ ঘণ্টা আগে", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600", link: "https://www.google.com/search?q=best+thriller+horror+movies" },
+            { title: "খেলাধুলা আপডেট: আন্তর্জাতিক টুর্নামেন্ট ও সাম্প্রতিক ম্যাচের লাইভ হাইলাইটস", category: "YouTube স্পোর্টস • ৩ ঘণ্টা আগে", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600", link: "https://www.youtube.com/results?search_query=sports+highlights" }
         ];
 
         const newsFeed = document.getElementById('newsFeed');
@@ -694,7 +686,7 @@
                             <h3>${item.title}</h3>
                             <div class="news-source-row">
                                 <span>${item.category}</span>
-                                <span>🌐 Google Discover</span>
+                                <span>🌐 পোর্টাল ফিড</span>
                             </div>
                         </div>
                     `;
@@ -730,7 +722,7 @@
             searchInput.name = nameAttr;
         }
 
-        // Local Search History Logic (Strictly Local)
+        // Local Search History Logic
         let incognitoActive = false;
         function saveSearchHistory(e) {
             const query = searchInput.value.trim();
@@ -738,7 +730,7 @@
             
             let history = JSON.parse(localStorage.getItem('mugdho_local_history') || '[]');
             history.unshift({ query: query, time: new Date().toLocaleTimeString() });
-            if(history.length > 30) history.pop(); // limit
+            if(history.length > 30) history.pop();
             localStorage.setItem('mugdho_local_history', JSON.stringify(history));
         }
 
@@ -806,7 +798,7 @@
             openTabsModal();
         }
 
-        // Fixed Google Lens & Voice Search
+        // Google Lens & Voice Search
         function openGoogleLens() {
             showMsg('📷 Opening Google Lens Scanner...');
             window.open('https://lens.google.com', '_blank');
