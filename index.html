@@ -13,14 +13,14 @@
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c1b, #1b143f, #090612);
+            background: linear-gradient(135deg, #090618, #150f2e, #05030a);
             color: #FFFFFF;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
-            padding-bottom: 70px; /* Space for bottom navigation bar */
+            padding-bottom: 70px;
         }
         .body-incognito {
             background: linear-gradient(135deg, #05020a, #12091f, #020105) !important;
@@ -39,52 +39,57 @@
             padding: 20px 40px !important;
         }
 
-        /* UC Browser 2026 World Cup Header Banner */
-        .uc-worldcup-banner {
+        /* 3D Exclusive Portal Header */
+        .portal-header-box {
             width: 100%;
-            background: linear-gradient(135deg, #181038, #2a1b54, #120b29);
-            border: 1px solid rgba(255, 215, 0, 0.25);
-            border-radius: 20px;
-            padding: 15px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
             position: relative;
-            margin-bottom: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 10px 0;
         }
-        .wc-top-title {
-            font-size: 13px;
-            color: #fbbf24;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
+        .header-content-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
         }
-        .wc-main-title {
-            font-size: 26px;
+        .robot-3d-icon {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
+            animation: floatRobot 3s ease-in-out infinite;
+        }
+        @keyframes floatRobot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .portal-title-text {
+            text-align: center;
+        }
+        .title-mugdho {
+            font-size: 38px;
             font-weight: 900;
-            background: linear-gradient(to right, #ffd700, #ff7e5f, #00d2ff);
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            background: linear-gradient(to right, #00d2ff, #7928ca, #ff007f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+            text-shadow: 0 4px 15px rgba(121, 40, 202, 0.4);
+            line-height: 1.1;
         }
-        .wc-graphics {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        .news-sched-btn {
-            background: linear-gradient(90deg, #f59e0b, #d97706);
-            color: #fff;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        .title-portal {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #00d2ff, #3a7bd5, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
         }
 
         /* Browser Toolbar */
@@ -118,23 +123,24 @@
             transform: scale(1.05);
         }
 
-        /* Advanced Omnibox (Search Bar with Engine Icon & Voice/Lens) */
+        /* Advanced Omnibox */
         .search-box {
             width: 100%;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 35px;
             padding: 8px 14px;
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         .search-box:focus-within {
-            border-color: #ffd700;
+            border-color: #00d2ff;
             background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
         }
         .engine-icon-container {
             display: flex;
@@ -150,7 +156,7 @@
         .search-select {
             background: transparent;
             border: none;
-            color: #ffd700;
+            color: #00d2ff;
             font-size: 13px;
             font-weight: 600;
             outline: none;
@@ -165,11 +171,11 @@
             background: transparent;
             border: none;
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
         }
         .search-input::placeholder {
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.5);
         }
         .search-action-icons {
             display: flex;
@@ -181,7 +187,7 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
-            color: #ffd700;
+            color: #00d2ff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -196,7 +202,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
         }
         .card {
             background: rgba(255, 255, 255, 0.04);
@@ -213,7 +219,7 @@
         .card:hover {
             transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255, 215, 0, 0.4);
+            border-color: rgba(0, 210, 255, 0.4);
         }
         .icon-box {
             width: 44px;
@@ -241,12 +247,12 @@
             text-overflow: ellipsis;
         }
 
-        /* Google-style Floating News Feed */
+        /* Google Discover Infinite Feed Style */
         .news-section-title {
             width: 100%;
             font-size: 15px;
             font-weight: 700;
-            color: #ffd700;
+            color: #00d2ff;
             margin-bottom: 12px;
             text-align: left;
             display: flex;
@@ -269,15 +275,24 @@
             gap: 12px;
             align-items: center;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
         .news-card:hover {
             background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 210, 255, 0.3);
         }
         .news-img {
-            width: 80px;
-            height: 65px;
+            width: 90px;
+            height: 70px;
             border-radius: 10px;
             object-fit: cover;
+            flex-shrink: 0;
+        }
+        .news-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .news-content h3 {
             font-size: 13px;
@@ -291,20 +306,29 @@
             color: rgba(255, 255, 255, 0.5);
         }
 
+        .loading-spinner {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #00d2ff;
+            display: none;
+        }
+
         /* Privacy Banner */
         .privacy-banner {
             width: 100%;
-            background: rgba(138, 43, 226, 0.12);
-            border: 1px solid rgba(138, 43, 226, 0.3);
+            background: rgba(0, 210, 255, 0.08);
+            border: 1px solid rgba(0, 210, 255, 0.2);
             border-radius: 14px;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-top: 10px;
         }
         .privacy-text h4 {
             font-size: 13px;
-            color: #d8b4fe;
+            color: #7dd3fc;
             margin-bottom: 2px;
         }
         .privacy-text p {
@@ -312,7 +336,7 @@
             color: rgba(255,255,255,0.5);
         }
         .privacy-badge {
-            background: #7c3aed;
+            background: #0284c7;
             color: white;
             padding: 6px 12px;
             border-radius: 20px;
@@ -321,7 +345,7 @@
             border: none;
         }
 
-        /* Bottom Floating Browser Navigation Bar (Home, Back, etc.) */
+        /* Bottom Floating Browser Navigation Bar */
         .bottom-nav-bar {
             position: fixed;
             bottom: 0;
@@ -351,7 +375,7 @@
             font-size: 18px;
         }
         .nav-item:hover {
-            color: #ffd700;
+            color: #00d2ff;
         }
 
         /* Popup Notification */
@@ -361,7 +385,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(-100px);
             background: rgba(15, 12, 27, 0.95);
-            border: 1px solid #ffd700;
+            border: 1px solid #00d2ff;
             color: #fff;
             padding: 12px 24px;
             border-radius: 30px;
@@ -380,14 +404,15 @@
     <div id="notificationModal">⚡ Notification Message</div>
 
     <div class="main-wrapper" id="mainContainer">
-        <!-- UC Browser 2026 World Cup Banner -->
-        <div class="uc-worldcup-banner">
-            <div class="wc-top-title">2026 FIFA World Cup Special</div>
-            <div class="wc-main-title">UC Browser Portal</div>
-            <div class="wc-graphics">
-                <span>🏆</span> ⚽ <span>📢</span>
+        <!-- 3D Exclusive Portal Header -->
+        <div class="portal-header-box">
+            <div class="header-content-flex">
+                <img src="https://api.iconify.design/fluent-emoji-flat:robot.svg" class="robot-3d-icon" alt="3D Robot">
+                <div class="portal-title-text">
+                    <div class="title-mugdho">Mugdho</div>
+                    <div class="title-portal">Portal</div>
+                </div>
             </div>
-            <button class="news-sched-btn" onclick="showMsg('🏆 Opening 2026 World Cup Live Schedule & News...')">News & Schedule &rsaquo;</button>
         </div>
 
         <!-- Browser Action Toolbar -->
@@ -399,17 +424,17 @@
                 <span id="incognitoIcon">🕵️‍♂️</span>Incognito
             </button>
             <button class="tool-btn" id="desktopBtn" onclick="toggleDesktop()">
-                <span id="desktopIcon">💻</span>Desktop Site
+                <span id="desktopIcon">💻</span>Desktop
             </button>
             <button class="tool-btn" onclick="window.location.reload()">
                 <span>🔄</span>Refresh
             </button>
-            <button class="tool-btn" onclick="showMsg('⭐ Added to Browser Bookmarks!')">
+            <button class="tool-btn" onclick="showMsg('⭐ Bookmarked successfully!')">
                 <span>⭐</span>Bookmark
             </button>
         </div>
 
-        <!-- Advanced Omnibox with Engine Icon, Voice & Google Lens -->
+        <!-- Advanced Omnibox -->
         <form class="search-box" action="https://www.google.com/search" method="GET" target="_blank" id="searchForm">
             <div class="engine-icon-container">
                 <img id="selectedEngineLogo" src="https://api.iconify.design/logos:google-icon.svg" class="engine-logo" alt="Engine Icon">
@@ -420,14 +445,14 @@
                     <option value="https://www.bing.com/search?q=" data-icon="https://api.iconify.design/logos:microsoft-icon.svg">Bing</option>
                 </select>
             </div>
-            <input type="text" class="search-input" id="searchInput" name="q" placeholder="Search or enter web address..." autocomplete="off">
+            <input type="text" class="search-input" id="searchInput" name="q" placeholder="Google এ সার্চ করুন অথবা URL লিখুন..." autocomplete="off">
             <div class="search-action-icons">
                 <button type="button" class="action-icon-btn" onclick="startVoiceSearch()" title="Voice Search">🎙️</button>
                 <button type="button" class="action-icon-btn" onclick="openGoogleLens()" title="Google Lens">📷</button>
             </div>
         </form>
 
-        <!-- Apps Grid -->
+        <!-- App Grid -->
         <div class="grid-container">
             <a href="https://chatgpt.com" class="card" target="_blank">
                 <div class="icon-box"><img src="https://api.iconify.design/logos:openai-icon.svg" alt="ChatGPT"></div>
@@ -463,31 +488,13 @@
             </a>
         </div>
 
-        <!-- Google-style Floating News Feed (Bangladesh & International) -->
-        <div class="news-section-title">📰 Trending News & Updates</div>
-        <div class="news-feed-container">
-            <div class="news-card" onclick="showMsg('Opening 2026 World Cup Qualifier Highlights...')">
-                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=150" class="news-img" alt="News">
-                <div class="news-content">
-                    <h3>2026 FIFA World Cup: Teams Gear Up for Global Clash in North America</h3>
-                    <p>International Sports • 2 hours ago</p>
-                </div>
-            </div>
-            <div class="news-card" onclick="showMsg('Opening National Tech & Education Portal...')">
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=150" class="news-img" alt="News">
-                <div class="news-content">
-                    <h3>Bangladesh Tech Sector Sees Rapid Growth with AI and Digital Innovation</h3>
-                    <p>National News • 4 hours ago</p>
-                </div>
-            </div>
-            <div class="news-card" onclick="showMsg('Opening Global Economic Review...')">
-                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=150" class="news-img" alt="News">
-                <div class="news-content">
-                    <h3>Global Markets React to Latest Tech Innovations and Economic Policies</h3>
-                    <p>World News • 6 hours ago</p>
-                </div>
-            </div>
+        <!-- Google Discover Feed Container -->
+        <div class="news-section-title">📰 Google Discover & Trending Feed</div>
+        <div class="news-feed-container" id="newsFeed">
+            <!-- Dynamic items will load here -->
         </div>
+
+        <div class="loading-spinner" id="loadingSpinner">⏳ Loading more news & movie clips...</div>
 
         <!-- Privacy Banner -->
         <div class="privacy-banner">
@@ -499,7 +506,7 @@
         </div>
     </div>
 
-    <!-- Bottom Browser Navigation Bar (Back, Home, etc.) -->
+    <!-- Bottom Browser Navigation Bar -->
     <div class="bottom-nav-bar">
         <button class="nav-item" onclick="goBack()">
             <span>⬅️</span>Back
@@ -507,7 +514,7 @@
         <button class="nav-item" onclick="goHome()">
             <span>🏠</span>Home
         </button>
-        <button class="nav-item" onclick="showMsg('Tabs Overview')">
+        <button class="nav-item" onclick="showMsg('📑 Active Tabs Overview')">
             <span>📑</span>Tabs
         </button>
         <button class="nav-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -515,12 +522,58 @@
         </button>
     </div>
 
-    <div class="footer" style="margin-bottom: 50px;">
-        Mugdho Browser Portal • Powered by UC & Firefox Hybrid UI
-    </div>
-
     <script>
-        // Search Engine Selector & Official Icon Changer
+        // Infinite Discover Feed Pool (News, Tech, Movies)
+        const feedItemsPool = [
+            { title: "2026 FIFA World Cup: Global Teams Gear Up for the Ultimate Clash in North America", category: "Sports • 1 hour ago", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=150", link: "https://www.google.com/search?q=2026+FIFA+World+Cup" },
+            { title: "Bangladesh Tech Sector Expands Rapidly with Next-Gen AI and Software Innovations", category: "Technology • 3 hours ago", img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=150", link: "https://www.google.com/search?q=Bangladesh+tech+news" },
+            { title: "Top 10 Thriller & Horror Masterpieces You Need to Watch This Season", category: "Entertainment & Movies • 4 hours ago", img: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=150", link: "https://www.google.com/search?q=best+horror+thriller+movies" },
+            { title: "Global Stock Markets React to Latest Breakthroughs in Artificial Intelligence", category: "World Business • 5 hours ago", img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=150", link: "https://www.google.com/search?q=global+markets+ai" },
+            { title: "Exploring the Scenic Beauty and Modern Growth of Khulna Division", category: "National • 6 hours ago", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=150", link: "https://www.google.com/search?q=Khulna+Bangladesh" },
+            { title: "Latest Smartphone Camera Technologies and Mobile Photography Tips in 2026", category: "Gadgets • 7 hours ago", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=150", link: "https://www.google.com/search?q=smartphone+camera+tech" },
+            { title: "Hollywood Blockbuster Movie Trailers and Upcoming Sci-Fi Releases", category: "Movie Clips • 8 hours ago", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=150", link: "https://www.google.com/search?q=upcoming+movies+2026" }
+        ];
+
+        const newsFeed = document.getElementById('newsFeed');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        let batchCount = 0;
+
+        function loadMoreContent() {
+            loadingSpinner.style.display = 'block';
+            setTimeout(() => {
+                feedItemsPool.forEach((item, index) => {
+                    const card = document.createElement('ahref' in item ? 'a' : 'div');
+                    card.className = 'news-card';
+                    card.href = item.link;
+                    card.target = '_blank';
+                    card.innerHTML = `
+                        <img src="${item.img}" class="news-img" alt="News Image">
+                        <div class="news-content">
+                            <h3>${item.title}</h3>
+                            <p>${item.category} • Batch ${batchCount + 1}</p>
+                        </div>
+                    `;
+                    newsFeed.appendChild(card);
+                });
+                batchCount++;
+                loadingSpinner.style.display = 'none';
+            }, 600);
+        }
+
+        // Initial Load
+        loadMoreContent();
+        loadMoreContent();
+
+        // Infinite Scroll Event Listener (Scroll down to load more automatically)
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                if (loadingSpinner.style.display !== 'block') {
+                    loadMoreContent();
+                }
+            }
+        });
+
+        // Search Engine Selector
         const searchForm = document.getElementById('searchForm');
         const searchEngine = document.getElementById('searchEngine');
         const searchInput = document.getElementById('searchInput');
@@ -535,7 +588,7 @@
             searchInput.name = nameAttr;
         }
 
-        // Voice Search Integration (Speech Recognition)
+        // Voice Search Integration
         function startVoiceSearch() {
             if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
                 showMsg('❌ Voice search is not supported in this browser.');
@@ -543,7 +596,7 @@
             }
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
-            recognition.lang = 'bn-BD'; // Supports Bengali and English speech
+            recognition.lang = 'bn-BD'; 
             recognition.onstart = function() {
                 showMsg('🎙️ Listening... Speak now!');
             };
@@ -559,13 +612,11 @@
             recognition.start();
         }
 
-        // Google Lens Simulation Feature
         function openGoogleLens() {
             showMsg('📷 Opening Google Lens Scanner...');
             window.open('https://lens.google.com', '_blank');
         }
 
-        // Floating Notification Popup
         function showMsg(text) {
             const modal = document.getElementById('notificationModal');
             modal.innerText = text;
@@ -575,7 +626,6 @@
             }, 2500);
         }
 
-        // VPN Toggle
         let vpnActive = false;
         function toggleVPN() {
             vpnActive = !vpnActive;
@@ -584,7 +634,7 @@
             if(vpnActive) {
                 btn.style.color = '#10b981';
                 icon.innerText = '🌐';
-                showMsg('🔒 Secure VPN Connected (Khulna Node Active)');
+                showMsg('🔒 Secure VPN Connected');
             } else {
                 btn.style.color = '#fff';
                 icon.innerText = '🛡️';
@@ -592,7 +642,6 @@
             }
         }
 
-        // Incognito Mode Animation & Toggle
         let incognitoActive = false;
         function toggleIncognito() {
             incognitoActive = !incognitoActive;
@@ -606,17 +655,16 @@
                 btn.style.color = '#a855f7';
                 pTitle.innerText = "🔒 Incognito PRO Active";
                 pDesc.innerText = "Encrypted session. Your digital footprint is hidden.";
-                showMsg('🕵️‍♂️ Incognito Mode Activated with Animation!');
+                showMsg('🕵️‍♂️ Incognito Mode Activated!');
             } else {
                 body.classList.remove('body-incognito');
                 btn.style.color = '#fff';
                 pTitle.innerText = "Private Browsing Mode";
                 pDesc.innerText = "No search history, cookies or cache are saved.";
-                showMsg('💡 Switched back to Normal Browser Mode.');
+                showMsg('💡 Switched back to Normal Mode.');
             }
         }
 
-        // Desktop Site Toggle
         let desktopActive = false;
         function toggleDesktop() {
             desktopActive = !desktopActive;
@@ -625,15 +673,14 @@
             if(desktopActive) {
                 container.classList.add('desktop-mode');
                 btn.style.color = '#3b82f6';
-                showMsg('💻 Switched to Desktop View Site Layout');
+                showMsg('💻 Switched to Desktop View');
             } else {
                 container.classList.remove('desktop-mode');
                 btn.style.color = '#fff';
-                showMsg('📱 Switched back to Mobile View Layout');
+                showMsg('📱 Switched back to Mobile View');
             }
         }
 
-        // Bottom Navigation Buttons Logic
         function goBack() {
             if(window.history.length > 1) {
                 window.history.back();
