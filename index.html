@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mugdho Portal</title>
-    <!-- Stylish Google Font Link -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0f19;
@@ -20,7 +18,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -34,37 +32,24 @@
             overflow-x: hidden;
         }
 
-        /* Stylish Mugdho Portal Header Logo */
+        /* Header Logo */
         .header-logo {
-            margin-top: 30px;
+            margin-top: 25px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-        .header-logo .bot-icon {
-            font-size: 2.2rem;
-            animation: floatBot 3s ease-in-out infinite;
-        }
-        @keyframes floatBot {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
         }
         .header-logo h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.4rem;
+            font-size: 2rem;
             background: linear-gradient(45deg, #00f2fe, #4facfe, #ff0844);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
             letter-spacing: 1px;
-            font-weight: 400;
         }
 
         /* Top Quick Actions Bar */
         .top-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin: 20px 0;
             overflow-x: auto;
             max-width: 95%;
@@ -117,7 +102,7 @@
         .google-icon-wrap {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             margin-right: 12px;
             cursor: pointer;
         }
@@ -320,9 +305,8 @@
 </head>
 <body>
 
-    <!-- Header Logo with Stylish Font -->
+    <!-- Header Logo -->
     <div class="header-logo">
-        <div class="bot-icon">🤖</div>
         <h1>Mugdho Portal</h1>
     </div>
 
@@ -338,6 +322,7 @@
     <!-- Google Style Search Bar -->
     <div class="search-container">
         <div class="google-icon-wrap" title="Google Search">
+            <!-- Perfect Google G Logo -->
             <svg viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
                 <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.17 21.32 7.23 24 12 24z"/>
@@ -351,11 +336,13 @@
         <input type="text" class="search-input" id="searchInput" placeholder="Search Google or type URL..." onkeypress="handleSearch(event)">
         
         <div class="search-tools">
+            <!-- Google Voice Search SVG Icon -->
             <div class="search-tool-icon" onclick="startVoiceSearch()" title="Search by voice">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8">
                     <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
                 </svg>
             </div>
+            <!-- Google Lens SVG Icon -->
             <div class="search-tool-icon" onclick="openGoogleLens()" title="Search by image">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#94a3b8">
                     <path d="M12 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM3 5v2c0 1.1.9 2 2 2h2V7H5V5h2V3H5c-1.1 0-2 .9-2 2zm16 0v2h-2v2h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-2v2h2zM3 19v-2h2v2h2v2H5c-1.1 0-2-.9-2-2zm18 0c0 1.1-.9 2-2 2h-2v-2h2v-2h2v2z"/>
@@ -400,7 +387,7 @@
         </a>
     </div>
 
-    <!-- Feed Section -->
+    <!-- Feed Section with YouTube Style Refresh -->
     <div class="feed-header">
         <h3>Google Discover & Trending Live Feed</h3>
         <button class="refresh-feed-btn" onclick="refreshFeed()">
@@ -408,7 +395,9 @@
         </button>
     </div>
 
-    <div class="feed-container" id="feedContainer"></div>
+    <div class="feed-container" id="feedContainer">
+        <!-- Dynamically populated via JS -->
+    </div>
 
     <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
@@ -456,6 +445,16 @@
                 title: "Exploring the Scenic Beauty and Modern Growth of Khulna Division",
                 category: "National • 6 hours ago",
                 image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Latest Smartphone Camera Technologies and Mobile Photography Tips",
+                category: "Gadgets • 7 hours ago",
+                image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                title: "Hollywood Blockbuster Movie Trailers and Upcoming Sci-Fi Releases",
+                category: "Movie Clips • 8 hours ago",
+                image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80"
             }
         ];
 
